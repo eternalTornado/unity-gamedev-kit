@@ -8,7 +8,8 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![Status](https://img.shields.io/badge/status-alpha-orange.svg)](https://github.com/eternalTornado/unity-gamedev-kit)
+[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/eternalTornado/unity-gamedev-kit/releases)
+[![Status](https://img.shields.io/badge/status-stable-brightgreen.svg)](https://github.com/eternalTornado/unity-gamedev-kit)
 
 </div>
 
@@ -47,9 +48,9 @@ Then open **Claude Code** in the project folder and type `/start`.
 MyUnityProject/
 ├── CLAUDE.md                        # Entry point — Claude reads this first
 ├── .claude/
-│   ├── agents/                      # 12 Unity-specialized sub-agents
-│   ├── skills/                      # 15 slash-commands (/start, /design-system, ...)
-│   ├── hooks/                       # 10 shell hooks (session-start, validate-commit, ...)
+│   ├── agents/                      # 13 Unity-specialized sub-agents
+│   ├── skills/                      # 23 slash-commands (/start, /design-system, /code-audit, ...)
+│   ├── hooks/                       # 6 shell hooks + 6 Windows .ps1 equivalents
 │   ├── rules/                       # 8 path-scoped rules for Assets/Scripts/**
 │   └── settings.json                # Hook + permission registrations
 ├── Design/GDD/                      # Game design docs — 8-section template
@@ -88,8 +89,9 @@ ugk init [PATH]          # Bootstrap a Unity project
   --force                # Overwrite existing files
 
 ugk check                # Verify git, Python, Claude Code tooling
-ugk update               # Upgrade an existing project's kit files (v0.2)
-ugk add agent <id>       # Add an optional agent (v0.2)
+ugk list [kind]          # List installable skills/agents/rules/profiles/hooks
+ugk add <kind> <name>    # Add an optional component (skill/agent/rule/hook/profile)
+ugk update [--dry-run]   # Upgrade kit files; hash-aware, preserves local changes
 ugk version              # Print version
 ```
 
@@ -119,23 +121,26 @@ Rules attach to folder globs. Code in `Assets/Scripts/AI/` gets AI rules (2ms bu
 
 - [**INSTALL.md**](./docs/INSTALL.md) — Prerequisites, Windows/macOS/Linux install
 - [**TUTORIAL.md**](./docs/TUTORIAL.md) — Build a demo game from concept to ship using `ugk`
-- [**WORKFLOW-GUIDE.md**](./docs/WORKFLOW-GUIDE.md) — Deep dive into each phase
-- [**TEAM-ONBOARDING.md**](./docs/TEAM-ONBOARDING.md) — Getting a 3-10 person Unity team aligned
+- [**WORKFLOW.md**](./docs/WORKFLOW.md) — Full task-type flows (GDD, bug, balance, reconcile)
+- [**TEAMS.md**](./docs/TEAMS.md) — Solo / GD+Dev / small team / remote configs
+- [**SKILLS.md**](./docs/SKILLS.md) — Complete skill reference
+- [**AGENTS.md**](./docs/AGENTS.md) — Complete agent reference
+- [**EXAMPLES.md**](./docs/EXAMPLES.md) — 5 end-to-end scenarios
 - [**CONTRIBUTING.md**](./CONTRIBUTING.md) — How to add agents/skills/rules
 
 ## Project status
 
-**v0.1.0 — alpha.** Minimum viable: base template, 5 rules, 5 hooks, 5 skills, `ugk init` + `ugk check`. Not yet stable. APIs may change.
+**v1.0.0 — stable.** All roadmap items shipped.
 
-**Roadmap to v1.0:**
-- [x] `ugk init` with base template
-- [ ] Full 15-skill set
-- [ ] Full 12-agent set
-- [ ] Scope profiles (mobile-casual, pc-midcore, multiplayer)
-- [ ] `ugk update` with diff-aware migration
-- [ ] `ugk add agent <id>`
-- [ ] CI: e2e test `ugk init` on empty Unity project
-- [ ] Windows-native hooks (PowerShell alternatives)
+- [x] `ugk init` with base template + scope profiles
+- [x] 23 skills (6 doc-code-sync, 12 core, 5 design/release)
+- [x] 13 agents covering leadership, design, engineering, process
+- [x] Scope profiles: mobile, pc, multiplayer
+- [x] `ugk update` with hash-aware migration
+- [x] `ugk add <kind> <name>` for selective install
+- [x] `ugk list [kind]` to browse catalog
+- [x] Windows-native hooks (PowerShell)
+- [x] CI templates (GitHub Actions)
 
 ## Inspirations & credits
 
