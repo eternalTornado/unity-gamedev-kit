@@ -75,6 +75,26 @@ def _sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def _rewrite_settings_for_windows(settings_path: Path) -> None:
+    """On Windows, rewrite hook commands to run .ps1 via PowerShell."""
+    import json
+    if not settings_path.exists():
+        return
+    try:
+        data = json.loads(settings_path.read_text(encoding="utf-8"))
+    except Exception:
+        return
+    hooks = data.get("hooks", {})
+    for _event, entries in hooks.items():
+        for entry in entries:
+            for h in entry.get("hooks", []):
+                cmd = h.get("command", "")
+                if cmd.endswith(".sh"):
+                    ps1 = cmd[:-3] + ".ps1"
+                    h["command"] = f'powershell -NoProfile -ExecutionPolicy Bypass -File "{ps1}"'
+    settings_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+
 def _ensure_in_project() -> Path:
     """Return cwd if it looks like a ugk-initialized project, else exit."""
     here = Path.cwd()
@@ -126,6 +146,11 @@ def init(
         for h in hooks_dir.glob("*.sh"):
             h.chmod(0o755)
         console.print("[green]✓[/green] Hooks marked executable")
+
+    # Rewrite settings.json for Windows to use .ps1 hooks via PowerShell
+    if sys.platform == "win32":
+        _rewrite_settings_for_windows(target / ".claude" / "settings.json")
+        console.print("[green]✓[/green] settings.json patched for Windows (.ps1 hooks)")
 
     # Init git if absent
     if not (target / ".git").exists():
