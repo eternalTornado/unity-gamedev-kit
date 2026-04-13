@@ -1,12 +1,13 @@
-# Pre-compact hook — snapshot context before compaction
+# Pre-compact hook - snapshot context before compaction
 # Windows PowerShell version
+$ErrorActionPreference = 'SilentlyContinue'
 
 $ts = Get-Date -Format "yyyy-MM-dd_HHmm"
 $snapDir = "production/session-logs"
 New-Item -ItemType Directory -Path $snapDir -Force -ErrorAction SilentlyContinue | Out-Null
 $snapFile = Join-Path $snapDir "pre-compact-$ts.md"
 
-"# Pre-Compact Snapshot — $ts" | Out-File $snapFile -Encoding UTF8
+"# Pre-Compact Snapshot - $ts" | Out-File $snapFile -Encoding UTF8
 "" | Out-File $snapFile -Append -Encoding UTF8
 
 if (Test-Path "production/session-state/active.md") {

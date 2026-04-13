@@ -1,5 +1,6 @@
-# Post-compact hook — remind Claude to re-read active session state
+# Post-compact hook - remind Claude to re-read active session state
 # Windows PowerShell version
+$ErrorActionPreference = 'SilentlyContinue'
 
 Write-Output "=== Post-compact reminder ==="
 Write-Output "Context was just compacted. Recover full state by reading:"

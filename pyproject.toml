@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "unity-gamedev-kit"
-version = "1.0.1"
+version = "1.0.2"
 description = "Opinionated AI-driven workflow for Unity game dev (GDD → Ship → Maintain). Install via uv, bootstrap any Unity project with one command."
 readme = "README.md"
 requires-python = ">=3.10"

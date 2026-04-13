@@ -1,9 +1,12 @@
-# Validate commit message — Windows PowerShell version
-# Enforces: commit message references a GDD file or story ID
+# Validate commit message - Windows PowerShell version
+# Enforces: commit message references a GDD file or story ID.
+# When wired under Claude Code PreToolUse, input arrives as JSON on stdin;
+# as a git commit-msg hook, $args[0] is the message file.
+$ErrorActionPreference = 'SilentlyContinue'
 
 $commitMsgFile = $args[0]
 if (-not $commitMsgFile -or -not (Test-Path $commitMsgFile)) {
-    Write-Output "validate-commit: no message file"
+    # No-op under PreToolUse - nothing to validate silently
     exit 0
 }
 
