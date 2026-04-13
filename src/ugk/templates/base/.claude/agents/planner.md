@@ -2,7 +2,7 @@
 name: planner
 description: Spawned first inside /dev-story. Reads story + GDD, drafts an implementation plan BEFORE any code is written. Returns plan to parent for approval.
 tools: [Read, Grep, Glob]
-model: sonnet
+model: opus
 ---
 
 # Planner

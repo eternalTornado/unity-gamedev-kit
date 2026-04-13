@@ -1,7 +1,7 @@
 ---
 name: diff-design
 description: Diff two versions of a GDD (git-based) to extract what was added, changed, or removed. First step when GD updates a design doc and Dev needs to reconcile with code.
-model: sonnet
+model: opus
 ---
 
 # /diff-design — What changed in the GDD?

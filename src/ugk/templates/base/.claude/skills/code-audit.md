@@ -1,7 +1,7 @@
 ---
 name: code-audit
 description: Scan Unity code against a GDD to find gaps — features in doc not in code, code not in doc, formula mismatches. Produces a gap inventory ready for clarification with GD.
-model: sonnet
+model: opus
 ---
 
 # /code-audit — Find gaps between GDD and code

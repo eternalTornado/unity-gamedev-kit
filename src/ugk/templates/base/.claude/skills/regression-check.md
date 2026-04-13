@@ -1,7 +1,7 @@
 ---
 name: regression-check
 description: Verify a change didn't break existing functionality. Runs test suite, compares against baseline, flags likely regressions.
-model: sonnet
+model: opus
 ---
 
 # /regression-check — Did we break anything?

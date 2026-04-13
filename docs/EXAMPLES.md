@@ -72,7 +72,42 @@ $ (in Claude Code)
   → PASS
 ```
 
-## Example 3: Bug fix during sprint
+## Example 3: New feature "double-jump" — GDD already exists
+
+**Situation:** `design/gdd/movement.md` already specifies double-jump (authored last sprint, reviewed, locked). Dev picks it up from the backlog.
+
+```
+> /scope-check "implement double-jump from movement.md §3"
+  → Classification: S (single system, has GDD, has acceptance criteria)
+  → Recommended: /create-stories or go straight to /dev-story if story exists
+
+> /story-readiness movement-double-jump
+  → PASS: GDD §8 has 4 acceptance criteria, dependencies (input, physics) green
+  → (if FAIL, falls back to /create-stories movement.md to generate one)
+
+> /dev-story movement-double-jump
+  → planner: reads movement.md, maps to PlayerController.cs + input rules
+  → programmer: implements per GDD §3 formulas and §7 tuning knobs
+  → tester: writes unit tests for 4 acceptance criteria from §8
+  → code-reviewer: checks code-vs-GDD alignment
+
+> /verify-against-doc movement-double-jump
+  → PASS (4/4 acceptance criteria)
+
+> /code-review movement-double-jump
+  → 2 nits (naming, extract magic number) → fix inline
+
+> /regression-check
+  → No regressions in single-jump, wall-jump, fall-damage
+
+> /story-done movement-double-jump
+  → Moved to production/stories/done/
+  → Sprint velocity updated
+```
+
+**Key difference vs Example 2 (no GDD):** skip `/design-system` / `/design-review` / `/propagate-design-change`. GDD is the contract; dev flow starts at `/story-readiness`. If the GDD has gaps discovered mid-implementation, pause and run `/clarify-gaps` — do **not** improvise design in code.
+
+## Example 4: Bug fix during sprint
 
 ```
 > /triage-bug "Player falls through floor on Level 3 cliff edge"
@@ -88,7 +123,7 @@ $ (in Claude Code)
 > /story-done bug-2026-0042
 ```
 
-## Example 4: Balance tune — boss HP
+## Example 5: Balance tune — boss HP
 
 ```
 > /scope-check "reduce boss HP by 20%"
@@ -105,7 +140,7 @@ $ (in Claude Code)
   → test_boss_phase2_dps_window uses old value — update expected
 ```
 
-## Example 5: Solo dev starting fresh
+## Example 6: Solo dev starting fresh
 
 ```
 $ uv tool install git+https://github.com/eternalTornado/unity-gamedev-kit.git

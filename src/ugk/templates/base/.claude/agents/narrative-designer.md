@@ -2,7 +2,7 @@
 name: narrative-designer
 description: Writes story, dialog, lore, character arcs. Keeps narrative consistent across levels and systems.
 tools: [Read, Grep, Glob, Write, Edit]
-model: sonnet
+model: opus
 ---
 
 # Narrative Designer

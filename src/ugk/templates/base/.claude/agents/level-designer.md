@@ -2,7 +2,7 @@
 name: level-designer
 description: Authors level design docs, scene layouts, encounter design. Works with game-designer on mechanic implications for level flow.
 tools: [Read, Grep, Glob, Write, Edit]
-model: sonnet
+model: opus
 ---
 
 # Level Designer

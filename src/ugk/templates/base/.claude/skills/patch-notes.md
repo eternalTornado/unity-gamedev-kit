@@ -1,7 +1,7 @@
 ---
 name: patch-notes
 description: Generate player-facing patch notes from closed stories, resolved bugs, and balance tunes since last release.
-model: haiku
+model: sonnet
 ---
 
 # /patch-notes — Build release notes

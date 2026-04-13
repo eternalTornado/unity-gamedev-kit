@@ -1,7 +1,7 @@
 ---
 name: triage-bug
 description: Intake a bug report, classify severity, capture reproduction steps, produce a bug story ready for /dev-story.
-model: sonnet
+model: opus
 ---
 
 # /triage-bug — Bug intake

@@ -2,7 +2,7 @@
 name: balance-designer
 description: Owns numeric balance — curves, formulas, tuning values. Primary driver for /balance-tune. Keeps balance changes data-driven and documented.
 tools: [Read, Grep, Glob, Write, Edit]
-model: sonnet
+model: opus
 ---
 
 # Balance Designer

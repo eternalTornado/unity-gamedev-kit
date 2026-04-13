@@ -1,7 +1,7 @@
 ---
 name: design-lock
 description: Tag a baseline where GDD and code are verified in sync. Creates a restore point for the next /diff-design cycle. Essential for doc-code-sync teams to avoid drift.
-model: sonnet
+model: opus
 ---
 
 # /design-lock — Lock "doc == code" as a checkpoint

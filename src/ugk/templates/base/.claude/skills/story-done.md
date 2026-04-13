@@ -1,7 +1,7 @@
 ---
 name: story-done
 description: Close a story after implementation. Verifies tests pass, runs /verify-against-doc, updates session state, archives story.
-model: haiku
+model: sonnet
 ---
 
 # /story-done — Close the story cleanly

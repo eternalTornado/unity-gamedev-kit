@@ -1,7 +1,7 @@
 ---
 name: design-review
 description: Peer-review a GDD for completeness, clarity, testability, and internal consistency. Use after /design-system drafts a new section.
-model: sonnet
+model: opus
 ---
 
 # /design-review — Peer review a GDD

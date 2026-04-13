@@ -1,7 +1,7 @@
 ---
 name: scope-check
 description: Classify a new task/change by scope and cross-system impact BEFORE committing to design or implementation. The "clarify-before-specify" gate.
-model: haiku
+model: sonnet
 ---
 
 # /scope-check — How big is this, really?

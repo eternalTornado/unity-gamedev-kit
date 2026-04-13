@@ -1,7 +1,7 @@
 ---
 name: clarify-gaps
 description: Generate a prioritized question list for the Game Designer to resolve ambiguous gaps. Essential for GD+Dev teams with no Producer — Dev drives reconciliation by asking the right questions.
-model: sonnet
+model: opus
 ---
 
 # /clarify-gaps — Ask GD the right questions

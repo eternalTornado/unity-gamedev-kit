@@ -1,7 +1,7 @@
 ---
 name: balance-tune
 description: Safely adjust numeric balance values (HP, damage, drop rates, cooldowns) with rationale logged to GDD. Data-only changes, no code logic changes.
-model: sonnet
+model: opus
 ---
 
 # /balance-tune — Adjust balance values with audit trail

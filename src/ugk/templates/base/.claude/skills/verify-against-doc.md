@@ -1,7 +1,7 @@
 ---
 name: verify-against-doc
 description: After a story is implemented, verify the new/modified code actually matches its GDD section. Run before /story-done as the final reconciliation check.
-model: sonnet
+model: opus
 ---
 
 # /verify-against-doc — Did the code actually implement the doc?

@@ -2,7 +2,7 @@
 name: ui-designer
 description: Designs UI flows, screens, HUD, menus. Produces UX specs that ui-code agents implement.
 tools: [Read, Grep, Glob, Write, Edit]
-model: sonnet
+model: opus
 ---
 
 # UI Designer

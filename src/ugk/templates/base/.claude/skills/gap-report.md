@@ -1,7 +1,7 @@
 ---
 name: gap-report
 description: Aggregate multiple diff/audit outputs into a single prioritized gap report ready for sprint planning. Use when /diff-design and /code-audit both ran and you need one source of truth.
-model: sonnet
+model: opus
 ---
 
 # /gap-report — Consolidate gaps into one actionable list

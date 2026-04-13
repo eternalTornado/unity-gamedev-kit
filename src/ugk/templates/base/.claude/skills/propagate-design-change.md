@@ -1,7 +1,7 @@
 ---
 name: propagate-design-change
 description: When a GDD change affects multiple systems, identify downstream docs and code that need updates. Prevents orphaned references and silent drift.
-model: sonnet
+model: opus
 ---
 
 # /propagate-design-change — Cross-system impact analysis

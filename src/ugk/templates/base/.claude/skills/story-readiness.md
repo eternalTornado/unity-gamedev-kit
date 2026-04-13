@@ -1,7 +1,7 @@
 ---
 name: story-readiness
 description: Verify a story has enough information to start development — GDD reference, acceptance criteria, scope, test type. Gate before /dev-story.
-model: haiku
+model: sonnet
 ---
 
 # /story-readiness — Is this story ready to code?

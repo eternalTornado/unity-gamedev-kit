@@ -2,7 +2,7 @@
 name: game-designer
 description: Authors and maintains mechanic-level GDDs (§3 Rules, §4 Formulas, §5 Edge Cases). Primary driver for /design-system and /update-gdd.
 tools: [Read, Grep, Glob, Write, Edit]
-model: sonnet
+model: opus
 ---
 
 # Game Designer

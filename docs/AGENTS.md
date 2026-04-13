@@ -8,7 +8,7 @@ All 13 agents shipped with unity-gamedev-kit. See `ugk list agents` in CLI.
 | `creative-director` | Game pillars, creative vision, design conflicts |
 | `technical-director` | Architecture, performance, ADRs |
 
-## Design (Sonnet)
+## Design (Opus)
 | Agent | Role |
 |-------|------|
 | `game-designer` | Mechanic-level GDD authoring |
@@ -16,6 +16,8 @@ All 13 agents shipped with unity-gamedev-kit. See `ugk list agents` in CLI.
 | `narrative-designer` | Story, dialog, lore |
 | `ui-designer` | Screens, HUD, UX specs |
 | `balance-designer` | Curves, formulas, tuning values |
+
+Design work touches player fantasy, acceptance criteria, and long-lived invariants — a wrong call propagates into code and art. Opus on design agents.
 
 ## Engineering (Sonnet)
 | Agent | Role |
@@ -25,12 +27,14 @@ All 13 agents shipped with unity-gamedev-kit. See `ugk list agents` in CLI.
 | `tester` | Write + run tests per test-standards |
 | `code-reviewer` | Code review per `/code-review` checklist |
 
-## Process (Sonnet)
-| Agent | Role |
-|-------|------|
-| `planner` | First step of `/dev-story` — analysis only, no writes |
-| `producer-lite` | Coordination for small teams without a real producer |
-| `qa-lead` | Test strategy, playtest plans, bug triage policy |
+## Process
+| Agent | Tier | Role |
+|-------|------|------|
+| `planner` | opus | First step of `/dev-story` — cross-system impact analysis, no writes |
+| `producer-lite` | sonnet | Coordination for small teams without a real producer |
+| `qa-lead` | opus | Test strategy, playtest plans, bug triage policy |
+
+`planner` and `qa-lead` are on Opus because their output shapes every story and test downstream — cheap to run, expensive to get wrong.
 
 ## How agents are invoked
 

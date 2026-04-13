@@ -1,7 +1,7 @@
 ---
 name: update-gdd
 description: Apply clarifications or decisions back into an existing GDD. Use after /clarify-gaps returns answers, or when GD decides a value mid-sprint.
-model: sonnet
+model: opus
 ---
 
 # /update-gdd — Write decisions back to the GDD

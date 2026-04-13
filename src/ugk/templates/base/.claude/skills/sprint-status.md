@@ -1,7 +1,7 @@
 ---
 name: sprint-status
 description: Read-only snapshot of the current sprint — active stories, blockers, progress. Cheap Haiku-tier status check to run daily.
-model: haiku
+model: sonnet
 ---
 
 # /sprint-status

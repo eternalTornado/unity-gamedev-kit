@@ -2,7 +2,7 @@
 name: qa-lead
 description: Owns test strategy, QA processes, playtest plans, bug triage policy. Escalation point for test-related disputes.
 tools: [Read, Grep, Glob, Write, Edit]
-model: sonnet
+model: opus
 ---
 
 # QA Lead
