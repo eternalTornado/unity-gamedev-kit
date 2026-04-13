@@ -1,0 +1,148 @@
+<div align="center">
+
+# 🎮 Unity GameDev Kit (`ugk`)
+
+**AI-driven workflow for Unity — from GDD to Ship, with Claude Code.**
+
+*Inspired by [github/spec-kit](https://github.com/github/spec-kit) and [Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios).*
+
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Status](https://img.shields.io/badge/status-alpha-orange.svg)](https://github.com/eternalTornado/unity-gamedev-kit)
+
+</div>
+
+---
+
+## What is this?
+
+A one-command scaffolder that drops an opinionated `.claude/` directory — **agents, skills, hooks, rules, and templates** — into any Unity project, so your whole team and Claude Code share the same workflow.
+
+**Philosophy:** Game dev isn't a stream of Jira tickets. It's a 7-phase pipeline: Concept → Systems Design → Technical Setup → Pre-Production → Production → Polish → Release. Each phase has a gate. Each gate has artifacts. `ugk` gives Claude Code the rules to enforce that.
+
+## Quick start
+
+```bash
+# Install once (persistent)
+uv tool install unity-gamedev-kit --from git+https://github.com/eternalTornado/unity-gamedev-kit.git
+
+# Or run once without installing
+uvx --from git+https://github.com/eternalTornado/unity-gamedev-kit.git ugk init MyGame
+
+# Bootstrap current Unity project
+cd MyUnityProject
+ugk init . --engine unity-6 --scope mobile-casual
+
+# Verify installation
+ugk check
+```
+
+Then open **Claude Code** in the project folder and type `/start`.
+
+> **Don't have `uv`?** Install it first: `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"` on Windows, or `curl -LsSf https://astral.sh/uv/install.sh | sh` on macOS/Linux.
+
+## What you get
+
+```
+MyUnityProject/
+├── CLAUDE.md                        # Entry point — Claude reads this first
+├── .claude/
+│   ├── agents/                      # 12 Unity-specialized sub-agents
+│   ├── skills/                      # 15 slash-commands (/start, /design-system, ...)
+│   ├── hooks/                       # 10 shell hooks (session-start, validate-commit, ...)
+│   ├── rules/                       # 8 path-scoped rules for Assets/Scripts/**
+│   └── settings.json                # Hook + permission registrations
+├── Design/GDD/                      # Game design docs — 8-section template
+├── Docs/architecture/               # Architecture Decision Records (ADRs)
+├── Production/                      # Epics, stories, sprint plans, session state
+└── Assets/Scripts/{Core,Gameplay,AI,UI,Networking}/   # Path-scoped rule zones
+```
+
+## The 7-Phase Workflow
+
+| Phase | Skill | Output | Gate |
+|---|---|---|---|
+| 1. Concept | `/brainstorm` → `/setup-engine` → `/map-systems` | `game-concept.md`, `systems-index.md` | `/gate-check concept` |
+| 2. Systems Design | `/design-system` (×N) → `/review-all-gdds` | 8-section GDDs, cross-review | `/gate-check systems` |
+| 3. Technical Setup | `/create-architecture` → `/architecture-decision` | `architecture.md`, ADRs | `/gate-check tech` |
+| 4. Pre-Production | `/create-epics` → `/create-stories` → `/sprint-plan` | Epic/Story backlog | `/gate-check preprod` |
+| 5. Production | `/dev-story` → `/code-review` | Code + unit/integration tests | `/gate-check prod` |
+| 6. Polish | `/perf-profile` → `/balance-check` → `/playtest-report` | Tuned build | `/gate-check polish` |
+| 7. Release | `/release-checklist` → `/hotfix` | Shipped build | `/gate-check release` |
+
+Each gate returns a verdict: `PASS` / `CONCERNS` / `FAIL`. `CONCERNS` passes with acknowledged risk; `FAIL` blocks the next phase.
+
+## Why `ugk` over copying files manually?
+
+1. **Versioned** — pinned releases, `ugk update` migrates projects to new kit versions.
+2. **One command, whole team** — every member runs `ugk init` and gets the identical `.claude/` directory; git-tracked.
+3. **Scope-aware templates** — `--scope mobile-casual` adds Addressables + file-size rules, `--scope multiplayer` adds networking rules, `--scope pc-midcore` adds DOTS/shader rules.
+4. **Pluggable** — `ugk add agent unity-dots-specialist` drops in an extra agent without touching the rest.
+
+## Commands
+
+```bash
+ugk init [PATH]          # Bootstrap a Unity project
+  --engine unity-6       # Engine version (default: unity-6)
+  --scope mobile-casual  # Rule profile (generic|mobile-casual|pc-midcore|multiplayer)
+  --force                # Overwrite existing files
+
+ugk check                # Verify git, Python, Claude Code tooling
+ugk update               # Upgrade an existing project's kit files (v0.2)
+ugk add agent <id>       # Add an optional agent (v0.2)
+ugk version              # Print version
+```
+
+## Core concepts
+
+### Collaboration Protocol (from [CCGS](https://github.com/Donchitos/Claude-Code-Game-Studios))
+
+> **User-driven collaboration, not autonomous execution.**
+> Every task: **Question → Options → Decision → Draft → Approval**
+
+Claude asks *"May I write this to `<filepath>`?"* before every `Write`/`Edit`. Multi-file changes need full-changeset approval. No commits without your instruction.
+
+### Priority hierarchy (from [TheOne Studio](https://github.com/The1Studio/theone-training-skills))
+
+When reviewing Unity C# code, Claude checks in order:
+
+1. 🔴 **Code Quality** — nullable types, zero warnings, throw not log, `nameof`, `readonly`
+2. 🟡 **Modern C#** — LINQ, expression bodies, pattern matching, `??`/`?.`/`??=`
+3. 🟢 **Unity Architecture** — VContainer DI, SignalBus events, Data Controllers, UniTask
+4. 🔵 **Performance** — no LINQ in `Update`, zero-alloc hot paths, object pooling
+
+### Path-scoped rules
+
+Rules attach to folder globs. Code in `Assets/Scripts/AI/` gets AI rules (2ms budget, debug visualization). Code in `Assets/Scripts/Networking/` gets network rules (server-authoritative, versioned messages). Code in `Prototypes/` gets relaxed rules (hardcode allowed). Same file type, different standards.
+
+## Documentation
+
+- [**INSTALL.md**](./docs/INSTALL.md) — Prerequisites, Windows/macOS/Linux install
+- [**TUTORIAL.md**](./docs/TUTORIAL.md) — Build a demo game from concept to ship using `ugk`
+- [**WORKFLOW-GUIDE.md**](./docs/WORKFLOW-GUIDE.md) — Deep dive into each phase
+- [**TEAM-ONBOARDING.md**](./docs/TEAM-ONBOARDING.md) — Getting a 3-10 person Unity team aligned
+- [**CONTRIBUTING.md**](./CONTRIBUTING.md) — How to add agents/skills/rules
+
+## Project status
+
+**v0.1.0 — alpha.** Minimum viable: base template, 5 rules, 5 hooks, 5 skills, `ugk init` + `ugk check`. Not yet stable. APIs may change.
+
+**Roadmap to v1.0:**
+- [x] `ugk init` with base template
+- [ ] Full 15-skill set
+- [ ] Full 12-agent set
+- [ ] Scope profiles (mobile-casual, pc-midcore, multiplayer)
+- [ ] `ugk update` with diff-aware migration
+- [ ] `ugk add agent <id>`
+- [ ] CI: e2e test `ugk init` on empty Unity project
+- [ ] Windows-native hooks (PowerShell alternatives)
+
+## Inspirations & credits
+
+- [github/spec-kit](https://github.com/github/spec-kit) — the CLI distribution pattern
+- [Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) — 48-agent studio, 7-phase pipeline, hook patterns
+- [The1Studio/theone-training-skills](https://github.com/The1Studio/theone-training-skills) — priority hierarchy, VContainer/SignalBus enforcement
+
+## License
+
+MIT — see [LICENSE](./LICENSE).

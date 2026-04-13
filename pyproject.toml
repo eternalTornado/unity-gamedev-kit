@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "unity-gamedev-kit"
+version = "0.1.0"
+description = "Opinionated AI-driven workflow for Unity game dev (GDD → Ship → Maintain). Install via uv, bootstrap any Unity project with one command."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "eternalTornado" }
+]
+keywords = ["unity", "gamedev", "claude-code", "ai", "workflow", "scaffold"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Code Generators",
+]
+dependencies = [
+    "typer>=0.12",
+    "rich>=13.7",
+    "jinja2>=3.1",
+    "platformdirs>=4.0",
+]
+
+[project.scripts]
+ugk = "ugk.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/eternalTornado/unity-gamedev-kit"
+Repository = "https://github.com/eternalTornado/unity-gamedev-kit"
+Issues = "https://github.com/eternalTornado/unity-gamedev-kit/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ugk"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/ugk/templates" = "ugk/templates"
