@@ -32,7 +32,7 @@ uvx --from git+https://github.com/eternalTornado/unity-gamedev-kit.git ugk init 
 
 # Bootstrap current Unity project
 cd MyUnityProject
-ugk init . --engine unity-6 --scope mobile-casual
+ugk init . --engine unity-6 --scope mobile
 
 # Verify installation
 ugk check
@@ -77,7 +77,7 @@ Each gate returns a verdict: `PASS` / `CONCERNS` / `FAIL`. `CONCERNS` passes wit
 
 1. **Versioned** — pinned releases, `ugk update` migrates projects to new kit versions.
 2. **One command, whole team** — every member runs `ugk init` and gets the identical `.claude/` directory; git-tracked.
-3. **Scope-aware templates** — `--scope mobile-casual` adds Addressables + file-size rules, `--scope multiplayer` adds networking rules, `--scope pc-midcore` adds DOTS/shader rules.
+3. **Scope-aware templates** — `--scope mobile` adds touch + perf + store rules, `--scope multiplayer` adds networking/authority rules, `--scope pc` adds scalability + gamepad rules.
 4. **Pluggable** — `ugk add agent unity-dots-specialist` drops in an extra agent without touching the rest.
 
 ## Commands
@@ -85,7 +85,7 @@ Each gate returns a verdict: `PASS` / `CONCERNS` / `FAIL`. `CONCERNS` passes wit
 ```bash
 ugk init [PATH]          # Bootstrap a Unity project
   --engine unity-6       # Engine version (default: unity-6)
-  --scope mobile-casual  # Rule profile (generic|mobile-casual|pc-midcore|multiplayer)
+  --scope mobile         # Scope profile (generic|mobile|pc|multiplayer)
   --force                # Overwrite existing files
 
 ugk check                # Verify git, Python, Claude Code tooling
@@ -120,6 +120,7 @@ Rules attach to folder globs. Code in `Assets/Scripts/AI/` gets AI rules (2ms bu
 ## Documentation
 
 - [**INSTALL.md**](./docs/INSTALL.md) — Prerequisites, Windows/macOS/Linux install
+- [**CLI.md**](./docs/CLI.md) — Complete flag reference for every `ugk` command
 - [**TUTORIAL.md**](./docs/TUTORIAL.md) — Build a demo game from concept to ship using `ugk`
 - [**WORKFLOW.md**](./docs/WORKFLOW.md) — Full task-type flows (GDD, bug, balance, reconcile)
 - [**TEAMS.md**](./docs/TEAMS.md) — Solo / GD+Dev / small team / remote configs

@@ -19,7 +19,7 @@ We'll build **"Orbit Runner"** — a 1-button hyper-casual mobile game where the
 
 ```bash
 cd ~/UnityProjects/OrbitRunner
-ugk init . --engine unity-6 --scope mobile-casual
+ugk init . --engine unity-6 --scope mobile
 ugk check
 ```
 
