@@ -29,7 +29,7 @@ fi
 WARNINGS=""
 
 # Check design documents for required sections
-DESIGN_FILES=$(echo "$STAGED" | grep -E '^design/gdd/')
+DESIGN_FILES=$(echo "$STAGED" | grep -Ei '^design/gdd/')
 if [ -n "$DESIGN_FILES" ]; then
     while IFS= read -r file; do
         if [[ "$file" == *.md ]] && [ -f "$file" ]; then
@@ -43,7 +43,7 @@ if [ -n "$DESIGN_FILES" ]; then
 fi
 
 # Validate JSON data files -- block invalid JSON
-DATA_FILES=$(echo "$STAGED" | grep -E '^assets/data/.*\.json$')
+DATA_FILES=$(echo "$STAGED" | grep -Ei '^assets/data/.*\.json$')
 if [ -n "$DATA_FILES" ]; then
     # Find a working Python command
     PYTHON_CMD=""
@@ -70,7 +70,7 @@ fi
 
 # Check for hardcoded gameplay values in gameplay code
 # Uses grep -E (POSIX extended) instead of grep -P (Perl) for cross-platform compatibility
-CODE_FILES=$(echo "$STAGED" | grep -E '^src/gameplay/')
+CODE_FILES=$(echo "$STAGED" | grep -Ei '^assets/scripts/gameplay/')
 if [ -n "$CODE_FILES" ]; then
     while IFS= read -r file; do
         if [ -f "$file" ]; then
@@ -81,8 +81,8 @@ if [ -n "$CODE_FILES" ]; then
     done <<< "$CODE_FILES"
 fi
 
-# Check for TODO/FIXME without assignee -- uses grep -E instead of grep -P
-SRC_FILES=$(echo "$STAGED" | grep -E '^src/')
+# Check for TODO/FIXME without assignee
+SRC_FILES=$(echo "$STAGED" | grep -Ei '^assets/scripts/')
 if [ -n "$SRC_FILES" ]; then
     while IFS= read -r file; do
         if [ -f "$file" ]; then
