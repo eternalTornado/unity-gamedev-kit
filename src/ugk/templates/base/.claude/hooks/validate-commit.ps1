@@ -24,7 +24,7 @@ $hasRef = ($msg -match "GDD-ref:") -or
 if (-not $hasRef) {
     Write-Output "ERROR: commit message must reference a GDD file, story ID, bug ID, or issue number."
     Write-Output "Examples:"
-    Write-Output "  GDD-ref: design/gdd/combat.md"
+    Write-Output "  GDD-ref: Design/GDD/combat.md"
     Write-Output "  story: combat-parry-impl"
     Write-Output "  bug: bug-2026-0042"
     Write-Output "  Closes #123"

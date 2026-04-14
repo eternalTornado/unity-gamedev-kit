@@ -6,7 +6,7 @@ Overlay for Unity projects targeting iOS/Android.
 - `.claude/rules/mobile-perf.md` — mobile-specific perf constraints
 - `.claude/rules/mobile-input.md` — touch-first input patterns
 - `.claude/rules/mobile-store.md` — App Store / Play Store submission checklist
-- `.claude/skills/mobile-profile.md` — `/mobile-profile` skill for platform profiling
+- `.claude/commands/mobile-profile.md` — `/mobile-profile` command for platform profiling
 
 ## Apply
 ```bash

@@ -69,6 +69,10 @@ For multi-section documents (GDDs, ADRs): create skeleton first, then fill secti
 
 Maintain `Production/session-state/active.md` as a living checkpoint. Update after each milestone. The `session-start.sh` hook auto-previews this file when a session begins.
 
+## Important: Start Claude from the project root
+
+Always open Claude Code from the Unity project root (where `.claude/` and `.git/` are), **not** from a subdirectory like `Assets/`. Starting from a subfolder means hooks won't run and `/slash` commands won't be found.
+
 ## First session?
 
 Type `/start` in Claude Code to begin the guided onboarding.

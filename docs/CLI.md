@@ -135,7 +135,7 @@ ugk update [--dry-run] [--only KIND]
 
 ```bash
 ugk update --dry-run                  # preview all changes
-ugk update --only skills              # upgrade only .claude/skills/
+ugk update --only commands             # upgrade only .claude/commands/
 ugk update                            # interactive upgrade of everything
 ```
 

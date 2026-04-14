@@ -40,8 +40,10 @@ BASE_ROOT = TEMPLATES_ROOT / "base"
 PROFILES_ROOT = TEMPLATES_ROOT / "profiles"
 
 KIND_DIRS = {
-    "skill": ".claude/skills",
-    "skills": ".claude/skills",
+    "command": ".claude/commands",
+    "commands": ".claude/commands",
+    "skill": ".claude/commands",       # alias: "skill" → commands
+    "skills": ".claude/commands",      # alias: "skills" → commands
     "agent": ".claude/agents",
     "agents": ".claude/agents",
     "rule": ".claude/rules",
@@ -159,8 +161,8 @@ def init(
             console.print("[green]✓[/green] git initialized")
 
     console.print("\n[bold]Next steps:[/bold]")
-    console.print("  1. [cyan]cd[/cyan] into the project")
-    console.print("  2. Open [cyan]Claude Code[/cyan]")
+    console.print("  1. [cyan]cd[/cyan] into the project root (where .claude/ is)")
+    console.print("  2. Open [cyan]Claude Code[/cyan] from HERE (not from Assets/ or a subfolder)")
     console.print("  3. Run [cyan]/start[/cyan] to begin the 7-phase workflow")
     console.print("\nDocs: [blue]https://github.com/eternalTornado/unity-gamedev-kit[/blue]\n")
 
@@ -185,9 +187,9 @@ def check() -> None:
     else:
         checks.append((".claude/hooks/ (run `ugk init` first)", False))
 
-    skills = here / ".claude" / "skills"
-    if skills.exists():
-        checks.append((f".claude/skills/ present ({len(list(skills.glob('*.md')))} skills)", True))
+    commands = here / ".claude" / "commands"
+    if commands.exists():
+        checks.append((f".claude/commands/ present ({len(list(commands.glob('*.md')))} commands)", True))
 
     agents = here / ".claude" / "agents"
     if agents.exists():
@@ -221,7 +223,7 @@ def list_cmd(
     console.print(Panel.fit(f"[bold]ugk list[/bold] — v{__version__}", border_style="cyan"))
 
     sources = {
-        "skills": (BASE_ROOT / ".claude" / "skills", "*.md"),
+        "commands": (BASE_ROOT / ".claude" / "commands", "*.md"),
         "agents": (BASE_ROOT / ".claude" / "agents", "*.md"),
         "rules": (BASE_ROOT / ".claude" / "rules", "*.md"),
         "hooks": (BASE_ROOT / ".claude" / "hooks", "*.sh"),

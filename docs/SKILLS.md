@@ -64,9 +64,9 @@ Rule of thumb: if the skill changes player-facing behaviour, an acceptance crite
 ```bash
 ugk list skills             # See available catalog
 # or write a new skill file:
-echo '---' > .claude/skills/my-skill.md
-echo 'name: my-skill' >> .claude/skills/my-skill.md
+echo '---' > .claude/commands/my-skill.md
+echo 'name: my-skill' >> .claude/commands/my-skill.md
 # ...
 ```
 
-Path: `.claude/skills/<name>.md` with YAML frontmatter (`name`, `description`, `model`).
+Path: `.claude/commands/<name>.md` with YAML frontmatter (`name`, `description`, `model`).

@@ -14,8 +14,8 @@ if ($branch) {
 }
 
 # Current sprint
-if (Test-Path "production/sprints") {
-    $latestSprint = Get-ChildItem -Path "production/sprints" -Filter "sprint-*.md" |
+if (Test-Path "Production/sprints") {
+    $latestSprint = Get-ChildItem -Path "Production/sprints" -Filter "sprint-*.md" |
         Sort-Object LastWriteTime -Descending | Select-Object -First 1
     if ($latestSprint) {
         Write-Output ""
@@ -25,7 +25,7 @@ if (Test-Path "production/sprints") {
 
 # Open bugs
 $bugCount = 0
-foreach ($dir in @("tests/playtest", "production")) {
+foreach ($dir in @("tests/playtest", "Production")) {
     if (Test-Path $dir) {
         $found = @(Get-ChildItem -Path $dir -Filter "BUG-*.md" -Recurse)
         $bugCount += $found.Count
@@ -47,7 +47,7 @@ if (Test-Path "Assets/Scripts") {
 }
 
 # Active session state
-$stateFile = "production/session-state/active.md"
+$stateFile = "Production/session-state/active.md"
 if (Test-Path $stateFile) {
     Write-Output ""
     Write-Output "=== ACTIVE SESSION STATE DETECTED ==="

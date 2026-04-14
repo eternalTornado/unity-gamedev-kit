@@ -38,7 +38,7 @@ unity-gamedev-kit/
 
 ## Adding a skill
 
-1. Drop the file in `src/ugk/templates/base/.claude/skills/<name>.md`.
+1. Drop the file in `src/ugk/templates/base/.claude/commands/<name>.md`.
 2. Add frontmatter `name:` + `description:` (triggering description).
 3. Document the 7-phase position: which phase is this for?
 4. Open a PR.
