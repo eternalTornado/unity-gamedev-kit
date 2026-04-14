@@ -7,7 +7,7 @@ Complete flag reference for every `ugk` command.
 Bootstrap a Unity project with the AI workflow kit. Run this **at the Unity project root** (the folder that contains `Assets/`, `ProjectSettings/`, etc.), not inside `Assets/`.
 
 ```bash
-ugk init [PATH] [--engine ENGINE] [--scope SCOPE] [--force]
+ugk init [PATH] [--engine ENGINE] [--scope SCOPE] [--di DI] [--force]
 ```
 
 | Flag | Type | Default | Valid values | Description |
@@ -15,6 +15,7 @@ ugk init [PATH] [--engine ENGINE] [--scope SCOPE] [--force]
 | `PATH` | positional | `.` | any directory path | Target project root. Created if missing. Use `.` for current directory. |
 | `--engine` | option | `unity-6` | `unity-6`, `unity-2022-lts` | Unity engine version. Controls which engine-reference snapshot is copied and which rules activate. |
 | `--scope` | option | `generic` | `generic`, `mobile`, `pc`, `multiplayer` | Scope profile overlay. See [Scope profiles](#scope-profiles) below. |
+| `--di` | option | `none` | `none`, `vcontainer`, `zenject` | DI framework. See [DI profiles](#di-profiles) below. Default is `none` (no DI framework). |
 | `--force` | flag | `false` | — | Overwrite existing files in the target directory. Without it, `ugk` skips files that already exist. |
 
 ### Scope profiles
@@ -30,12 +31,24 @@ Scope determines which extra rules, perf budgets, and store-submission checks la
 
 You can combine profiles after init with `ugk add profile <name>`.
 
+### DI profiles
+
+By default, `ugk init` does **not** install any DI framework. The base template uses ScriptableObject events, Service Locator, or manual injection. If your project uses a DI container, pass `--di` to layer the right rules and CLAUDE.md patches.
+
+| DI | When to use | What it adds |
+|---|---|---|
+| `none` | Most projects, prototypes, small-medium scope | No DI rules. Architecture uses events + manual wiring. |
+| `vcontainer` | Production projects that want lightweight DI | VContainer rules (`LifetimeScope`, constructor injection, `IStartable`/`ITickable`). |
+| `zenject` | Legacy projects already using Zenject/Extenject | Zenject rules (`SceneContext`, `MonoInstaller`, Zenject Signals). |
+
+You can add a DI profile later with `ugk add profile di-vcontainer` or `ugk add profile di-zenject`.
+
 ### Examples
 
 ```bash
 ugk init . --engine unity-6 --scope mobile
-ugk init MyGame --engine unity-2022-lts --scope pc
-ugk init . --scope multiplayer --force
+ugk init MyGame --engine unity-2022-lts --scope pc --di vcontainer
+ugk init . --scope multiplayer --di zenject --force
 ```
 
 ---
@@ -74,14 +87,14 @@ ugk list [KIND]
 
 | Arg | Valid values | Description |
 |---|---|---|
-| `KIND` | `skills`, `agents`, `rules`, `hooks`, `profiles` | Filter to one category. Omit to list all. |
+| `KIND` | `commands`, `agents`, `rules`, `hooks`, `profiles` | Filter to one category. Omit to list all. `skills` is accepted as an alias for `commands`. |
 
 ### Examples
 
 ```bash
 ugk list                # all categories
-ugk list skills         # only skills
-ugk list profiles       # only scope profiles
+ugk list commands       # only slash commands
+ugk list profiles       # only scope/DI profiles
 ```
 
 ---
@@ -96,17 +109,18 @@ ugk add KIND NAME [--force]
 
 | Arg / Flag | Valid values | Description |
 |---|---|---|
-| `KIND` | `skill`, `agent`, `rule`, `hook`, `profile` | Category of the component. |
-| `NAME` | any entry listed by `ugk list KIND` | Component name, without file extension. For profiles: `mobile`, `pc`, `multiplayer`. |
+| `KIND` | `command`, `agent`, `rule`, `hook`, `profile` | Category of the component. `skill` is accepted as an alias for `command`. |
+| `NAME` | any entry listed by `ugk list KIND` | Component name, without file extension. For profiles: `mobile`, `pc`, `multiplayer`, `di-vcontainer`, `di-zenject`. |
 | `--force` | — | Overwrite if the target file already exists. Without it, refuses to overwrite. |
 
 ### Examples
 
 ```bash
-ugk add skill code-audit              # install the /code-audit skill
+ugk add command code-audit             # install the /code-audit command
 ugk add agent balance-designer        # install balance-designer subagent
 ugk add hook validate-meta-files      # install the Unity .meta hook
 ugk add profile multiplayer           # layer multiplayer rules on an existing project
+ugk add profile di-vcontainer         # add VContainer DI rules
 ugk add rule networking --force       # overwrite existing networking rule
 ```
 
@@ -123,7 +137,7 @@ ugk update [--dry-run] [--only KIND]
 | Flag | Valid values | Description |
 |---|---|---|
 | `--dry-run` | — | Show what would change (add / differ) without writing. Safe to run anytime. |
-| `--only` | `skills`, `agents`, `rules`, `hooks` | Limit the update to one category. Omit to update all four. |
+| `--only` | `commands`, `agents`, `rules`, `hooks` | Limit the update to one category. Omit to update all four. |
 
 ### Behaviour
 

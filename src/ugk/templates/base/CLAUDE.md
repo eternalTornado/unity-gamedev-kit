@@ -21,7 +21,7 @@ Every task: **Question → Options → Decision → Draft → Approval**.
 
 1. 🔴 **Code Quality** — nullable types ON, zero warnings, throw not log, `nameof`, `readonly`/`const`, no inline comments.
 2. 🟡 **Modern C#** — LINQ over loops, expression bodies, pattern matching, `??`/`?.`/`??=`, records.
-3. 🟢 **Unity Architecture** — VContainer DI, SignalBus events, Data Controllers (never direct data access), UniTask async.
+3. 🟢 **Unity Architecture** -- clean separation of concerns, event-driven communication, Data Controllers (never direct data access), UniTask async.
 4. 🔵 **Performance** — no LINQ in `Update`, zero-alloc hot paths, object pooling, frame budget.
 
 ## 7-Phase Workflow
@@ -42,8 +42,8 @@ Between phases: `/gate-check <phase>` → verdict `PASS` / `CONCERNS` / `FAIL`.
 
 - **Engine**: Unity 6 (6000.x)
 - **Language**: C# 9 (Unity 6 constraint — no C# 10+ features)
-- **DI**: VContainer (preferred) or TheOne.DI
-- **Events**: SignalBus or Publisher/Subscriber
+- **Architecture**: No DI framework -- use ScriptableObject events, Service Locator, or manual injection
+
 - **Async**: UniTask
 - **Version Control**: Git, trunk-based
 - **Test**: Unity Test Framework (NUnit)

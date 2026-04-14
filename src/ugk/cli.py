@@ -97,6 +97,39 @@ def _rewrite_settings_for_windows(settings_path: Path) -> None:
     settings_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
+DI_PROFILES = {
+    "none": None,
+    "vcontainer": "di-vcontainer",
+    "zenject": "di-zenject",
+}
+
+DI_STACK_LINES = {
+    "vcontainer": "- **DI**: VContainer (`LifetimeScope`, constructor injection, `IStartable`/`ITickable`)",
+    "zenject": "- **DI**: Zenject / Extenject (`SceneContext`, `MonoInstaller`, Zenject Signals)",
+}
+
+DI_ARCH_LINES = {
+    "vcontainer": "3. 🟢 **Unity Architecture** -- VContainer DI, interface-based services, Data Controllers (never direct data access), UniTask async.",
+    "zenject": "3. 🟢 **Unity Architecture** -- Zenject DI, installer-based bindings, Zenject Signals, Data Controllers (never direct data access), UniTask async.",
+}
+
+
+def _patch_claude_md_di(claude_md: Path, di: str) -> None:
+    """Patch CLAUDE.md to reflect the chosen DI framework."""
+    if not claude_md.exists() or di not in DI_STACK_LINES:
+        return
+    text = claude_md.read_text(encoding="utf-8")
+    text = text.replace(
+        "- **Architecture**: No DI framework -- use ScriptableObject events, Service Locator, or manual injection",
+        DI_STACK_LINES[di],
+    )
+    text = text.replace(
+        "3. 🟢 **Unity Architecture** -- clean separation of concerns, event-driven communication, Data Controllers (never direct data access), UniTask async.",
+        DI_ARCH_LINES[di],
+    )
+    claude_md.write_text(text, encoding="utf-8")
+
+
 def _ensure_in_project() -> Path:
     """Return cwd if it looks like a ugk-initialized project, else exit."""
     here = Path.cwd()
@@ -113,16 +146,18 @@ def init(
     path: str = typer.Argument(".", help="Path to Unity project (use '.' for current)"),
     engine: str = typer.Option("unity-6", "--engine", help="Engine version: unity-6, unity-2022-lts"),
     scope: str = typer.Option("generic", "--scope", help="Scope profile: generic, mobile, pc, multiplayer"),
+    di: str = typer.Option("none", "--di", help="DI framework: none, vcontainer, zenject"),
     force: bool = typer.Option(False, "--force", help="Overwrite existing files"),
 ) -> None:
     """Bootstrap a Unity project with the AI workflow kit."""
     target = Path(path).resolve()
     target.mkdir(parents=True, exist_ok=True)
 
+    di_label = di if di != "none" else "no DI"
     console.print(Panel.fit(
         f"[bold cyan]Unity GameDev Kit[/bold cyan] v{__version__}\n"
         f"Target: [yellow]{target}[/yellow]\n"
-        f"Engine: [green]{engine}[/green] | Scope: [green]{scope}[/green]",
+        f"Engine: [green]{engine}[/green] | Scope: [green]{scope}[/green] | DI: [green]{di_label}[/green]",
         border_style="cyan",
     ))
 
@@ -141,6 +176,20 @@ def init(
             console.print(f"[green]✓[/green] Applied [bold]{scope}[/bold] profile ({p_copied} files)")
         else:
             console.print(f"[yellow]![/yellow] Scope '{scope}' not found — skipped")
+
+    # Apply DI profile overlay if requested
+    if di != "none":
+        di_profile = DI_PROFILES.get(di)
+        if di_profile is None:
+            console.print(f"[red]Unknown DI option:[/red] {di}. Valid: {', '.join(DI_PROFILES)}")
+            raise typer.Exit(1)
+        di_dir = PROFILES_ROOT / di_profile
+        if di_dir.exists():
+            d_copied = _copy_template(di_dir, target, overwrite=force)
+            console.print(f"[green]✓[/green] Applied [bold]{di}[/bold] DI profile ({d_copied} files)")
+            _patch_claude_md_di(target / "CLAUDE.md", di)
+        else:
+            console.print(f"[yellow]![/yellow] DI profile '{di}' not found — skipped")
 
     # Make hooks executable on Unix
     hooks_dir = target / ".claude" / "hooks"
