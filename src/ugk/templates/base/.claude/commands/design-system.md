@@ -20,7 +20,7 @@ Plus **Game Feel** section: input responsiveness (ms/frames), animation timing (
 
 ## Process
 
-1. Read `Design/GDD/game-concept.md` and `Design/GDD/systems-index.md`.
+1. Read ALL `.md` files in `Design/GDD/` to understand the full design context (concept, existing systems, dependencies). Look for a concept doc and systems index regardless of filename.
 2. Read any upstream/downstream system GDDs to catch dependencies.
 3. **Technical Feasibility Pre-Check** — flag if the system requires research or tech spike before design proceeds.
 4. For each section (in order):

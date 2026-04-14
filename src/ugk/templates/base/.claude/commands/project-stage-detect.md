@@ -12,9 +12,11 @@ Scans the project structure to determine the current workflow phase and suggest 
 
 ## Detection logic
 
+IMPORTANT: Always scan `Design/GDD/` for ALL `.md` files. Read each one. Do not only look for specific filenames.
+
 | Check | Indicator |
 |---|---|
-| `Design/GDD/game-concept.md` exists | Phase 1 started |
+| Any `.md` file exists in `Design/GDD/` | Phase 1 started |
 | `Design/GDD/systems-index.md` + 2 system GDDs exist | Phase 1 complete |
 | All GDDs have 8 sections | Phase 2 complete |
 | `Docs/architecture/overview.md` exists | Phase 3 started |
@@ -29,7 +31,7 @@ Scans the project structure to determine the current workflow phase and suggest 
 
 ## Process
 
-1. **Scan** the directory structure for the indicators above.
+1. **Scan** `Design/GDD/` and list ALL `.md` files. Read each file to check section completeness. Then scan other directories for the indicators above.
 2. **Determine** the current phase (the highest phase with incomplete indicators).
 3. **Report**:
    - Current phase and sub-step

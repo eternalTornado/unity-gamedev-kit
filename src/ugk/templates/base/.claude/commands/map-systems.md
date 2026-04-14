@@ -11,7 +11,7 @@ Reads the game concept document and identifies every discrete game system that n
 
 ## Process
 
-1. **Read** `Design/GDD/game-concept.md`. If missing, suggest `/brainstorm` first.
+1. **Read ALL `.md` files** in `Design/GDD/`. Look for a concept doc (any file describing the overall game concept, core loop, or pillars -- it may not be named `game-concept.md`). If no GDD files exist at all, suggest `/brainstorm` first.
 2. **Extract systems** -- identify every mechanical system implied by the concept (e.g., combat, movement, inventory, progression, UI, economy).
 3. **Present system list** to user for validation. Ask:
    - Are any missing?

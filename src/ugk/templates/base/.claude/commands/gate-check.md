@@ -23,7 +23,8 @@ Where `<phase>` is one of: `concept`, `systems`, `tech`, `preprod`, `prod`, `pol
 
 ### `concept`
 - [ ] Engine configured in `.claude/docs/technical-preferences.md` (not "[TO BE CONFIGURED]")
-- [ ] `Design/GDD/game-concept.md` exists with all 9 sections
+- [ ] A game concept document exists in `Design/GDD/` (scan ALL `.md` files -- may not be named `game-concept.md`)
+- [ ] Concept doc contains: elevator pitch, core loop, game pillars, target audience
 - [ ] `Design/GDD/systems-index.md` exists with dependency ordering
 - [ ] At least 3 game pillars + 1 anti-pillar defined
 
@@ -65,7 +66,7 @@ Where `<phase>` is one of: `concept`, `systems`, `tech`, `preprod`, `prod`, `pol
 
 ## Process
 
-1. Read the relevant files, check each requirement.
+1. Scan `Design/GDD/` for ALL `.md` files. Read each one. Then check each requirement.
 2. Print a checklist with ✅ / ⚠️ / ❌ per item.
 3. Compute the verdict.
 4. If FAIL: list missing artifacts and suggest skills to produce them.

@@ -12,6 +12,10 @@ Reads every GDD in `Design/GDD/` and performs two independent review passes, the
 
 ## Process
 
+### Phase 0: Scan (MANDATORY)
+
+List ALL `.md` files in `Design/GDD/`. Read every file. Do not skip any. Report how many GDDs were found before proceeding.
+
 ### Phase 1: Consistency Check (can run in parallel with Phase 2)
 
 For every pair of GDDs that share a dependency:
