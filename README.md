@@ -4,8 +4,6 @@
 
 **AI-driven workflow for Unity — from GDD to Ship, with Claude Code.**
 
-*Inspired by [github/spec-kit](https://github.com/github/spec-kit) and [Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios).*
-
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Version](https://img.shields.io/badge/version-1.1.1-brightgreen.svg)](https://github.com/eternalTornado/unity-gamedev-kit/releases)
@@ -98,14 +96,14 @@ ugk version              # Print version
 
 ## Core concepts
 
-### Collaboration Protocol (from [CCGS](https://github.com/Donchitos/Claude-Code-Game-Studios))
+### Collaboration Protocol
 
 > **User-driven collaboration, not autonomous execution.**
 > Every task: **Question → Options → Decision → Draft → Approval**
 
 Claude asks *"May I write this to `<filepath>`?"* before every `Write`/`Edit`. Multi-file changes need full-changeset approval. No commits without your instruction.
 
-### Priority hierarchy (from [TheOne Studio](https://github.com/The1Studio/theone-training-skills))
+### Priority hierarchy
 
 When reviewing Unity C# code, Claude checks in order:
 
