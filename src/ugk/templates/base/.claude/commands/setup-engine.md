@@ -11,32 +11,55 @@ Walks the user through configuring the technical foundations of their Unity proj
 
 ## Process
 
-1. **Read current state** -- check `.claude/docs/technical-preferences.md` for any already-configured values.
-2. **Engine & rendering** -- ask:
-   - Unity version (6, 2022 LTS, etc.)
-   - Render pipeline (URP, HDRP, Built-in)
-   - Target platforms (PC, Mobile, Console, Web)
-3. **C# conventions** -- ask:
-   - Naming: classes, variables, events, files, constants
-   - Preferred patterns: async (UniTask vs coroutines), events (C# events, UnityEvent, ScriptableObject channels)
-4. **Performance budgets** -- ask:
-   - Target framerate (30/60/120)
-   - Frame budget (ms)
-   - Draw call ceiling
-   - Memory ceiling
-5. **Testing** -- ask:
-   - Test framework (Unity Test Framework, NUnit)
-   - Minimum coverage target
-6. **DI / Architecture** -- if not already configured via `--di` flag, ask:
-   - DI framework preference (none, VContainer, Zenject, other)
-   - Event system preference
-7. **Write** each answered section to `.claude/docs/technical-preferences.md` immediately after approval.
-8. Suggest next step: `/map-systems` or `/design-system`.
+1. **Read current state** — check `.claude/docs/technical-preferences.md` for any already-configured values. Skip categories that are already set (unless the user asks to change them).
+
+2. **Batch ALL open questions into one `AskUserQuestion` call** (max 4 questions per call; if more are needed, issue a second call after the first batch returns). Use 2-4 concrete options per question. Do NOT ask free-form in chat. Do NOT ask one question at a time.
+
+   Questions to ask (skip any that are already configured):
+
+   a. **Engine + render pipeline** — options like "Unity 6 + URP", "Unity 6 + HDRP", "Unity 6 + Built-in", "Unity 2022 LTS + URP"
+   b. **Target platforms** — options like "PC only", "Mobile only (iOS + Android)", "PC + Mobile", "Console + PC"
+   c. **Async pattern** — options like "UniTask (recommended)", "Plain Task/async-await", "Coroutines only", "Mixed"
+   d. **Event system** — options like "C# events", "UnityEvent", "ScriptableObject channels", "Mixed"
+
+3. **Performance budgets** — second `AskUserQuestion` batch:
+
+   a. **Target framerate** — "30 fps", "60 fps (recommended)", "120 fps", "Variable (min/target/max)"
+   b. **Memory ceiling** — "256 MB (low-end mobile)", "512 MB (mid mobile)", "1 GB (high-end mobile/low-end PC)", "2 GB+ (PC/console)"
+   c. **Test framework** — "Unity Test Framework (NUnit)", "NUnit + custom runner", "None — skip tests"
+   d. **Minimum coverage target** — "50%", "70% (recommended)", "90%", "No target"
+
+4. **Naming conventions** — populate from common C# defaults unless the user overrides:
+   - Classes: `PascalCase`
+   - Variables: `camelCase` (private with `_underscore` prefix)
+   - Events/signals: `On<Thing><Happened>` (PascalCase)
+   - Files: match primary class name
+   - Constants: `UPPER_SNAKE_CASE` or `PascalCase`
+
+5. **DI / Architecture** — if not already configured via the `ugk init --di` flag, ask:
+   - DI framework preference: `none` (default), `VContainer`, `Zenject`, `Other`
+   - If the user picks none, reinforce that ugk defaults to ScriptableObject events + Service Locator + manual injection.
+
+6. **Write** each answered section to `.claude/docs/technical-preferences.md` immediately after approval. Use incremental writing — never buffer multiple sections.
+
+7. **Sync constitution (optional)** — if `/memory/constitution.md` doesn't exist yet and the user plans to use Phase 4 speckit flow, offer to generate it from `CLAUDE.md` + the filled `technical-preferences.md`.
 
 ## Output
 
-`.claude/docs/technical-preferences.md` -- fully populated.
+- `.claude/docs/technical-preferences.md` — fully populated
+- `/memory/constitution.md` (optional, for speckit integration)
 
 ## Collaboration protocol
 
-Ask one category at a time. Present sensible defaults based on the target platform. Write each section immediately after approval.
+- Use `AskUserQuestion` — batch all open questions into one call with concrete options.
+- Write each section immediately after approval.
+- Do not override already-configured values without explicit user confirmation.
+
+## Suggested next step
+
+End with a "Suggested next step" block. Typical options:
+
+- `/map-systems` — enumerate the systems this game will need
+- `/brainstorm` — if the game concept is not yet written
+- `/design-system <name>` — if you already know the first system to design
+- `/gate-check concept` — verify Phase 1 is complete

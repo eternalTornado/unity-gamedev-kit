@@ -1,13 +1,13 @@
 ---
 name: start
-description: Guided onboarding -- detects project state by scanning Design/GDD/, Assets/Scripts/, and config files. Routes to the right phase. Use whenever a new team member joins or you don't know where to begin.
+description: Guided onboarding -- detects project state by scanning Design/GDD/, Assets/Scripts/, and config files. Routes to the right phase of the 5-phase workflow.
 ---
 
 # /start -- Guided Onboarding
 
 ## What this command does
 
-Scans the project to understand its current state, then routes the user to the correct next step in the 7-phase workflow.
+Scans the project to understand its current state, then routes the user to the correct next step in the **5-phase workflow** (Concept → Systems Design → Architecture → Implementation → Polish).
 
 ## Step 1: Scan the project (MANDATORY -- do this FIRST, before saying anything)
 
@@ -32,13 +32,16 @@ List `Assets/Scripts/` subdirectories. Count `.cs` files (excluding `.gitkeep`).
 
 ### 1d. Check architecture docs
 
-Check if `Docs/architecture/` has any `.md` files.
+List `.md` files in `Docs/architecture/`. Note overview.md, per-system docs, ADR count.
 
-### 1e. Check production state
+### 1e. Check implementation specs
+
+List subdirectories in `Docs/specs/`. Per module, check if `plan.md` and `tasks.md` exist and count how many tasks are marked `[X]`.
+
+### 1f. Check production state
 
 - Check `Production/session-state/active.md` for paused session
-- Check `Production/epics/` for epic files
-- Check `Production/sprints/` for sprint files
+- Check `Production/stage.txt` for last gate passed
 
 ## Step 2: Present assessment
 
@@ -55,34 +58,42 @@ Design/GDD/ (3 files found):
 Engine: Unity 6 configured (URP, mobile target)
 Code: 0 .cs files in Assets/Scripts/
 Architecture: No docs yet
-Production: No sprints or epics
+Specs: No Docs/specs/ — Phase 4 not started
+Production: No active session state, Production/stage.txt missing
 
-Assessment: Phases 1-2 partially complete. GDDs exist but need standardization.
+Assessment: Phase 1 complete. Phase 2 partially complete — GDDs exist but not all in 8-section format.
 ```
 
 ## Step 3: Route to next action
 
-Based on what you found, suggest paths from this table:
+Based on what you found, suggest one or more paths from this table:
 
-| What you found | Suggested path |
-|---|---|
-| Active session state in active.md | Resume from where you left off |
-| No GDD files at all, no concept | `/brainstorm` -- start from scratch |
-| GDD files exist but not in 8-section format | `/adopt` -- retrofit to kit format |
-| GDDs in 8-section format, engine not configured | `/setup-engine` -- configure tech stack |
-| GDDs complete, engine configured, no architecture | `/create-architecture` or `/gate-check 2` |
-| Code exists but few/no design docs | `/project-stage-detect` -- full assessment |
-| Everything looks complete for current phase | `/gate-check <phase>` -- validate and advance |
+| What you found | Current phase | Suggested command |
+|---|---|---|
+| Active session state in `active.md` | varies | Resume from where you left off |
+| No GDD files at all, no concept | Phase 1 | `/brainstorm` — start from scratch |
+| GDD files exist but not in 8-section format | Phase 1-2 | `/adopt` — retrofit to kit format |
+| GDDs in 8-section format, engine not configured | Phase 1 | `/setup-engine` — configure tech stack |
+| GDDs complete, engine configured, no architecture | Phase 2→3 | `/gate-check systems` then `/create-architecture` |
+| Architecture docs exist, no specs | Phase 3→4 | `/gate-check architecture` then `/implement <module>` |
+| Specs exist, some `tasks.md` complete | Phase 4 | `/implement <next-module>` or `/gate-check implementation` |
+| All MVP modules complete | Phase 4→5 | `/gate-check implementation` then `/perf-profile` / `/playtest-report` |
+| Code exists but few/no design docs | varies | `/project-stage-detect` — full assessment |
 
-Present the paths that fit as a table. Let the user choose.
+Present the matching paths to the user. If more than one path fits, use the `AskUserQuestion` tool to let the user pick. Do NOT generate the question free-form in chat.
 
 ## CRITICAL RULES
 
-- **ALWAYS scan Design/GDD/ first.** Never skip this step. Never say "no GDDs found" without actually listing the directory.
-- **Read every .md file** in Design/GDD/. They may have any filename -- not just `game-concept.md`.
+- **ALWAYS scan `Design/GDD/` first.** Never skip this step. Never say "no GDDs found" without actually listing the directory.
+- **Read every `.md` file** in Design/GDD/. They may have any filename — not just `game-concept.md`.
 - **Be specific** about what you found. List filenames. Count sections. Note what's missing.
 - **Don't guess the project state.** If you can't read a directory, say so and ask the user.
+- **Use `AskUserQuestion`** for routing decisions with 2-4 concrete options. Do NOT free-form ask "what do you want to do next?" in chat.
+
+## Suggested next step
+
+End with a "Suggested next step" block listing the 1-3 commands most likely to move the project forward, given the current phase. If the user still needs to pick (multiple viable paths), that pick is the next step.
 
 ## Collaboration protocol
 
-Follow the kit-wide Q -> O -> D -> Draft -> Approval protocol. Always ask before writing files.
+Follow the kit-wide Q → O → D → Draft → Approval protocol. Always ask before writing files.

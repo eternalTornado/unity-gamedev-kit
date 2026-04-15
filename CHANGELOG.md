@@ -4,6 +4,27 @@ All notable changes to `unity-gamedev-kit` are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versioning follows [SemVer](https://semver.org/).
 
+## [1.1.0] — 2026-04-15
+
+### Changed — Workflow restructure (BREAKING)
+- **5-phase workflow** replaces 7-phase. New phases: Concept → Systems Design → Architecture → Implementation → Polish.
+- `/gate-check` phases renamed: `tech` → `architecture`, `preprod` + `prod` merged into `implementation`, `polish` + `release` merged into `polish`.
+- Phase 4 (Implementation) now delegates to [speckit](https://github.com/github/spec-kit) for `/plan` → `/tasks` → `/implement`. `/speckit.specify` is skipped because the GDD already contains the feature spec.
+- Document locations for speckit outputs: `Docs/specs/<module>/plan.md`, `tasks.md` (override of speckit's default `specs/<feature>/`).
+
+### Added — New command
+- `/implement <module>` — Phase 4 entry point. Reads GDD + architecture doc, delegates to speckit (`/plan` → `/tasks` → `/implement`), finishes with `/code-review`.
+
+### Changed — Commands
+- `/dev-story` is deprecated. It redirects to `/implement`. Legacy `Production/stories/` workflow is no longer the canonical flow.
+- All commands now MUST end with a **"Suggested next step"** block — a short list of 1-3 commands the user could run next.
+- Commands that collect user input (`/start`, `/setup-engine`, `/brainstorm`, `/map-systems`, `/design-system`, `/create-architecture`) now use the `AskUserQuestion` tool with **batched** questions (up to 4 per call). Free-form chat questions are reserved for truly open-ended inputs only.
+
+### Added — Constitution-like features folded into CLAUDE.md
+- **Session Rules** section: precedence hierarchy (GDD > CLAUDE.md > technical-preferences > rules > drafts), document focus (max 3 per task), `/clear` and `/compact` triggers, incremental writing.
+- **Governance** section: AI must not self-approve gates, gate fail → fix → re-submit (max 2 cycles), P0 hotfix exception, constitution-like-change approval flow, compliance citations.
+- **Speckit integration** section: explains the Phase 4 flow and where speckit writes its documents.
+
 ## [1.0.0] — 2026-04-13
 
 First stable release. Covers the full GDD → Ship → Maintain workflow for Unity.

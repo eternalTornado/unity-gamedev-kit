@@ -1,40 +1,32 @@
 ---
 name: dev-story
-description: Implements a single Story end-to-end — plan, code, test, review. Delegates to specialized agents (planner, gameplay-programmer, tester, code-reviewer) and enforces the priority hierarchy (Quality → Modern C# → Architecture → Performance).
+description: DEPRECATED. Use /implement instead. Kept as a shim that redirects Jira-style story workflows to the speckit-based /implement flow.
 ---
 
-# /dev-story — Implement a Story
+# /dev-story — DEPRECATED
 
-## Usage
+This command is **deprecated**. It was part of the old 7-phase workflow that tracked Jira-style stories under `Production/stories/<story-id>.md`. The new 5-phase workflow implements modules directly from GDDs via speckit.
+
+## Use `/implement` instead
 
 ```
-/dev-story <story-id>
-/dev-story ORBIT-001
+/implement <module-name>
 ```
 
-## Process
+See [`implement.md`](implement.md) for the full flow: GDD → `/speckit.plan` → `/speckit.tasks` → `/speckit.implement` → `/code-review`.
 
-1. **Read the story** at `Production/stories/<story-id>.md`. If missing, stop and ask user.
-2. **Read linked GDD section** referenced by the story.
-3. **Planner phase** — delegate to `planner` agent to produce a TODO list in `Production/plans/<story-id>.md`.
-4. **Implementation phase** — delegate to the right specialist based on file path:
-   - `Assets/Scripts/Gameplay/` → `gameplay-programmer`
-   - `Assets/Scripts/AI/` → `ai-programmer`
-   - `Assets/Scripts/UI/` → `ui-programmer`
-   - `Assets/Scripts/Networking/` → `network-programmer`
-   - `Assets/Scripts/Core/` → `engine-programmer`
-5. **Test phase** — delegate to `tester` agent to write unit tests in `Tests/Unit/<system>/`.
-6. **Compile check** — run Unity's command-line compile (or ask user to open Unity Editor) and surface errors.
-7. **Code review phase** — delegate to `code-reviewer` agent enforcing the 4-priority hierarchy:
-   - 🔴 Quality: nullable, no warnings, throw not log, `nameof`, `readonly`
-   - 🟡 Modern C#: LINQ, expression bodies, pattern matching
-   - 🟢 Architecture: VContainer DI, SignalBus, Data Controllers, UniTask
-   - 🔵 Performance: no LINQ in Update, zero-alloc hot paths, pooling
-8. **Close the story** — delegate to `docs-manager` if new public APIs were added. Ask user if ready for `/story-done`.
+## Migration
 
-## Collaboration protocol
+If you have existing `Production/stories/*.md` files:
 
-- Before each phase, summarize to the user what the next agent will do and ask for approval.
-- Never commit code during `/dev-story` — commits require explicit user instruction.
-- If compile fails or tests fail, fix them; do not mark the story done with broken tests.
-- If the story's acceptance criteria cannot be met with available infrastructure, stop and escalate (may need an ADR first).
+1. For each story, identify the parent module (the system it belongs to in `systems-index.md`).
+2. Run `/implement <module>` instead of `/dev-story <story-id>`.
+3. If the story contains implementation details not yet in the GDD (acceptance criteria, edge cases), fold them into the GDD first via `/update-gdd`.
+4. Archive or delete `Production/stories/` once all stories are migrated.
+
+If a team member wants to keep Jira-style tracking (e.g., for external project management), that is orthogonal — track stories in Jira, but let Claude implement modules end-to-end via `/implement`.
+
+## Suggested next step
+
+- `/implement <module-name>` — the new canonical flow
+- `/update-gdd <module>` — fold story-level acceptance criteria back into the GDD before implementing

@@ -55,3 +55,12 @@ model: sonnet
 - Always cite file:line
 - Prefer suggesting patches to pointing out problems
 - Don't duplicate what the automated linter/CI would catch — focus on semantic issues
+
+## Suggested next step
+
+End with a "Suggested next step" block. Typical options:
+
+- Fix all 🔴 BLOCKING issues before merging (list specific file:line items)
+- `/implement <module>` again — if BLOCKING issues require re-implementing part of the module
+- `/gate-check implementation` — once all MVP modules have passed review
+- `/perf-profile` — if Performance issues flagged in the review warrant deeper profiling

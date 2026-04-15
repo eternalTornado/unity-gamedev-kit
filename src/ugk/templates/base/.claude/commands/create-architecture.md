@@ -30,8 +30,6 @@ Translates approved GDDs into technical architecture documents. Produces class d
    - Dependency injection / wiring strategy
    - Event flow between systems
    - Shared data contracts
-4. Suggest next: `/architecture-decision` for any design trade-offs, or `/gate-check 3`.
-
 ## Output
 
 - `Docs/architecture/<system>.md` per system
@@ -39,4 +37,13 @@ Translates approved GDDs into technical architecture documents. Produces class d
 
 ## Collaboration protocol
 
-Present one system at a time. For each system, show the proposed architecture before writing. Flag any GDD requirements that are technically challenging.
+Present one system at a time. For each system, show the proposed architecture before writing. Flag any GDD requirements that are technically challenging. Use `AskUserQuestion` for any enumerable choice (pattern selection, data model variant, Unity integration approach) — do NOT ask free-form in chat.
+
+## Suggested next step
+
+End with a "Suggested next step" block. Typical options:
+
+- `/architecture-decision <title>` — record any design trade-off as an ADR
+- `/create-architecture` again — if more systems still need architecture docs
+- `/gate-check architecture` — verify Phase 3 is complete
+- `/implement <module>` — start Phase 4 implementation once architecture is approved

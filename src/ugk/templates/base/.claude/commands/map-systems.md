@@ -13,10 +13,7 @@ Reads the game concept document and identifies every discrete game system that n
 
 1. **Read ALL `.md` files** in `Design/GDD/`. Look for a concept doc (any file describing the overall game concept, core loop, or pillars -- it may not be named `game-concept.md`). If no GDD files exist at all, suggest `/brainstorm` first.
 2. **Extract systems** -- identify every mechanical system implied by the concept (e.g., combat, movement, inventory, progression, UI, economy).
-3. **Present system list** to user for validation. Ask:
-   - Are any missing?
-   - Should any be merged or split?
-   - Any systems that are out of scope for MVP?
+3. **Present system list** to user for validation. Use the `AskUserQuestion` tool (multi-select) if there's any ambiguity about scope ("which of these are MVP?", "which should merge?"). Do NOT ask free-form in chat.
 4. **Dependency mapping** -- for each system, identify:
    - Upstream dependencies (what it reads from)
    - Downstream dependents (what reads from it)
@@ -26,7 +23,6 @@ Reads the game concept document and identifies every discrete game system that n
    - Complexity: Low / Medium / High
    - Suggested design order (respecting dependencies)
 6. **Write** `Design/GDD/systems-index.md` with the full map.
-7. Suggest next step: `/design-system <first-system>` for the highest-priority system.
 
 ## Output
 
@@ -34,4 +30,12 @@ Reads the game concept document and identifies every discrete game system that n
 
 ## Collaboration protocol
 
-Present the full system list for approval before writing. The user may add, remove, or re-prioritize systems.
+Present the full system list for approval before writing. Use `AskUserQuestion` with concrete options whenever the user needs to pick, classify, or prioritize. The user may add, remove, or re-prioritize systems.
+
+## Suggested next step
+
+End with a "Suggested next step" block. Typical options:
+
+- `/design-system <first-system>` — author the highest-priority system GDD
+- `/gate-check concept` — verify Phase 1 is complete before drafting system GDDs
+- `/architecture-decision <title>` — if any listed system needs a tech spike before design
