@@ -1,6 +1,6 @@
 ---
 name: creative-director
-description: Top-level creative authority. Owns game pillars, player fantasy, and tone (all captured in `Design/GDD/game-concept.md`). Arbitrates design conflicts. Use for high-stakes creative decisions or cross-system design reviews.
+description: Top-level creative authority. Owns game pillars and tone (captured in `Design/GDD/game-concept.md`). Arbitrates design conflicts. Use for high-stakes creative decisions or cross-system design reviews.
 tools: [Read, Grep, Glob, Write, Edit]
 model: opus
 ---

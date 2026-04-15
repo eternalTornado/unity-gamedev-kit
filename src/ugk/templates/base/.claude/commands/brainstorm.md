@@ -10,7 +10,7 @@ description: 6-phase ideation that produces a game-concept.md with pillars, MDA 
 `Design/GDD/game-concept.md` with these sections:
 
 1. **Elevator pitch** (one sentence)
-2. **Core fantasy** (what the player imagines themselves doing)
+2. **Core experience** (what the player imagines themselves doing)
 3. **MDA breakdown** (Mechanics, Dynamics, Aesthetics)
 4. **Target audience** (Bartle types + demographics)
 5. **Core loop diagram** (arrows in text)

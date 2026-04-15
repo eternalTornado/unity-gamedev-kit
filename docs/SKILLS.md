@@ -54,7 +54,7 @@ All skills shipped with unity-gamedev-kit. Run `ugk list skills` to see them in 
 ## Model tier rationale
 
 - **Sonnet**: default for sprint/story operations and narrative-only tasks — fast, cheap, good enough for well-scoped execution
-- **Opus**: design authoring, doc↔code reconciliation, QA triage, balance tuning, and phase-gate verdicts — anything that requires multi-document synthesis or high-stakes judgement where a wrong call ships bugs or breaks fantasy
+- **Opus**: design authoring, doc↔code reconciliation, QA triage, balance tuning, and phase-gate verdicts — anything that requires multi-document synthesis or high-stakes judgement where a wrong call ships bugs or breaks the player experience
 - **Haiku**: reserved; no skills currently use it (kept for future read-only formatters)
 
 Rule of thumb: if the skill changes player-facing behaviour, an acceptance criterion, or a design invariant, pick **opus**. If it only reports, classifies, or routes, **sonnet** is enough.

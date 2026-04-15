@@ -17,7 +17,7 @@ All 13 agents shipped with unity-gamedev-kit. See `ugk list agents` in CLI.
 | `ui-designer` | Screens, HUD, UX specs |
 | `balance-designer` | Curves, formulas, tuning values |
 
-Design work touches player fantasy (captured in the concept doc), acceptance criteria, and long-lived invariants — a wrong call propagates into code and art. Opus on design agents.
+Design work touches pillars (captured in the concept doc), acceptance criteria, and long-lived invariants — a wrong call propagates into code and art. Opus on design agents.
 
 ## Engineering (Sonnet)
 | Agent | Role |

@@ -62,7 +62,7 @@ Pick **B**.
 Claude generates 10 concept seeds with MDA (Mechanics-Dynamics-Aesthetics). You pick 2-3 favorites. It does player motivation mapping, then drafts `Design/GDD/game-concept.md` with:
 
 - Elevator pitch
-- Core fantasy
+- Core experience
 - Target audience (Bartle types)
 - Core loop diagram
 - 3-5 game pillars

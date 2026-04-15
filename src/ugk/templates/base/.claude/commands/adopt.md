@@ -9,7 +9,7 @@ description: Retrofit existing GDD documents into the ugk 7-section format. Use 
 
 Scans `Design/GDD/` for existing markdown documents and helps convert them into the ugk 7-section GDD format, preserving all existing content while adding missing sections.
 
-> **Note on Player Fantasy**: Older ugk (≤1.1.0) required an 8th "Player Fantasy" section. Since 1.1.1 the GDD is the implementation spec consumed by speckit in Phase 4, so mood/tone/fantasy content belongs in the concept doc (`Design/GDD/game-concept.md`), not per-system GDDs. If an existing doc has a Player Fantasy section, offer to move its content into the concept doc and drop the section here.
+The 7-section GDD is the implementation spec consumed by speckit in Phase 4. Any mood, tone, or creative-framing content found in existing docs does NOT belong in per-system GDDs — relocate it to the concept doc (`Design/GDD/game-concept.md`) and drop it from the GDD. Never invent or re-add non-implementation-actionable sections during retrofit.
 
 ## Process
 
@@ -22,7 +22,7 @@ Scans `Design/GDD/` for existing markdown documents and helps convert them into 
    5. Dependencies
    6. Tuning Knobs
    7. Acceptance Criteria
-3. **Present a gap report** -- table showing each doc and which sections are missing/present. Flag any legacy "Player Fantasy" sections as content to relocate to the concept doc.
+3. **Present a gap report** -- a markdown table with one row per doc and one column per section. **Column headers MUST use the full section names** (`Overview`, `Detailed Rules`, `Formulas`, `Edge Cases`, `Dependencies`, `Tuning Knobs`, `Acceptance Criteria`) — do NOT abbreviate to codes like `1-Ov`, `4-Fo`, etc. Use ✅ for present, 🟡 for partial, ❌ for missing. Flag any non-implementation content (e.g. mood/tone/creative framing) as candidates to relocate to the concept doc.
 4. **For each document with gaps** (user chooses order):
    a. Show existing content mapped to the closest section
    b. Draft missing sections based on context from existing content

@@ -4,6 +4,18 @@ All notable changes to `unity-gamedev-kit` are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versioning follows [SemVer](https://semver.org/).
 
+## [1.1.2] — 2026-04-15
+
+### Fixed — Player Fantasy fully excised from runtime surface
+- Agents were still proposing a `Player Fantasy` section during `/adopt` retrofits. Root cause: residual "player fantasy" phrasing in `creative-director` description, `design-docs` rule, and the `/adopt` note block nudged the model to re-introduce the 8th section. All runtime-facing mentions have been scrubbed.
+- `creative-director` agent description: now owns "game pillars and tone" (no `player fantasy`).
+- `rules/design-docs.md`: concept-doc hint rewritten without the word "fantasy".
+- `/adopt`: legacy-section note replaced with a hard rule — never invent or re-add non-implementation-actionable sections; retrofit is strictly 7-section.
+- `/brainstorm`, `/design-system`, `docs/TUTORIAL.md`, `docs/SKILLS.md`, `docs/AGENTS.md`: "fantasy" language replaced with "experience" / "creative framing" / "pillars" so nothing in the package re-suggests the removed section.
+
+### Changed — `/adopt` gap report must use full section names
+- The gap matrix table now **MUST** use full column headers (`Overview`, `Detailed Rules`, `Formulas`, `Edge Cases`, `Dependencies`, `Tuning Knobs`, `Acceptance Criteria`) — abbreviated codes like `1-Ov`, `4-Fo` are prohibited.
+
 ## [1.1.1] — 2026-04-15
 
 ### Changed — GDD format (7 sections, was 8)
