@@ -1,0 +1,79 @@
+name: Unity CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    name: Run EditMode + PlayMode tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: Library-
+
+      - uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          testMode: all
+          artifactsPath: test-results
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          checkName: Test Results
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: test-results
+
+  validate-docs:
+    name: Validate GDD structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check GDD 7-section presence
+        run: |
+          missing=0
+          for gdd in design/gdd/*.md; do
+            [ -f "$gdd" ] || continue
+            for section in "Overview" "Detailed Rules" "Formulas" "Edge Cases" "Dependencies" "Tuning Knobs" "Acceptance Criteria"; do
+              if ! grep -q "## .*$section" "$gdd"; then
+                echo "::warning file=$gdd::Missing section: $section"
+                missing=1
+              fi
+            done
+          done
+          exit 0  # warning-only; not blocking
+
+  validate-commits:
+    name: Validate commit messages
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check PR commits
+        run: |
+          base=$(git merge-base origin/${{ github.base_ref }} HEAD)
+          fail=0
+          while IFS= read -r sha; do
+            msg=$(git log -1 --format=%B "$sha")
+            if ! echo "$msg" | grep -qE "(GDD-ref:|story:|bug:|#[0-9]+|^Merge )"; then
+              echo "::error::Commit $sha missing GDD/story/bug reference"
+              fail=1
+            fi
+          done < <(git rev-list "$base"..HEAD)
+          exit $fail
