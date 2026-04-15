@@ -6,7 +6,7 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![Version](https://img.shields.io/badge/version-1.1.2-brightgreen.svg)](https://github.com/eternalTornado/unity-gamedev-kit/releases)
+[![Version](https://img.shields.io/badge/version-1.1.3-brightgreen.svg)](https://github.com/eternalTornado/unity-gamedev-kit/releases)
 [![Status](https://img.shields.io/badge/status-stable-brightgreen.svg)](https://github.com/eternalTornado/unity-gamedev-kit)
 
 </div>
@@ -128,7 +128,7 @@ Rules attach to folder globs. Code in `Assets/Scripts/AI/` gets AI rules (2ms bu
 
 ## Project status
 
-**v1.1.2 — stable.** 5-phase workflow with speckit integration for Phase 4.
+**v1.1.3 — stable.** 5-phase workflow with speckit integration for Phase 4.
 
 - [x] `ugk init` with base template + scope profiles
 - [x] 40 commands across the 5-phase workflow + doc-code-sync loop
