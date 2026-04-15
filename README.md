@@ -70,8 +70,6 @@ MyUnityProject/
 
 Each gate returns a verdict: `PASS` / `CONCERNS` / `FAIL`. `CONCERNS` passes with acknowledged risk; `FAIL` blocks the next phase.
 
-**Why 5 phases instead of 7?** Phase 4 (Implementation) delegates to [speckit](https://github.com/github/spec-kit) for planning and task breakdown. The GDD already contains feature spec content (Detailed Rules, Formulas, Edge Cases, Acceptance Criteria), so `/speckit.specify` is skipped — `/implement <module>` reads the GDD directly and runs `/speckit.plan` → `/speckit.tasks` → `/speckit.implement`. This collapses old "Pre-Production + Production + Release" into one delegated phase.
-
 ## Why `ugk` over copying files manually?
 
 1. **Versioned** — pinned releases, `ugk update` migrates projects to new kit versions.
