@@ -162,40 +162,29 @@ Minimum 3 Foundation-layer ADRs before gate.
 ### 3.3 Gate check
 
 ```
-> /gate-check tech
+> /gate-check architecture
 ```
 
 ---
 
-## Phase 4 — Pre-Production
+## Phase 4 — Implementation (via speckit)
 
 ```
-> /create-epics
-> /create-stories
-> /sprint-plan
+> /implement orbit
 ```
 
-Claude turns systems into Epics → Stories. Each story has acceptance criteria and a test plan.
+`/implement <module>` reads `Design/GDD/orbit.md` (the feature spec) and `Docs/architecture/orbit.md` (tech context), then delegates to speckit:
 
----
-
-## Phase 5 — Production
-
-### 5.1 Implement a story
-
-```
-> /dev-story ORBIT-001
-```
-
-Claude delegates to:
-1. `planner` agent — creates TODO list in `Production/plans/ORBIT-001.md`
-2. `gameplay-programmer` agent — writes C# code in `Assets/Scripts/Gameplay/Orbit/`
-3. `tester` agent — writes unit tests in `Tests/Unit/`
-4. `code-reviewer` agent — verifies priority hierarchy:
+1. `/speckit.plan` → writes `Docs/specs/orbit/plan.md` + `data-model.md` + `contracts/`
+2. `/speckit.tasks` → writes `Docs/specs/orbit/tasks.md` (broken-down work)
+3. `/speckit.implement` → generates code + tests, marks tasks `[X]`
+4. `/code-review` → enforces the priority hierarchy:
    - 🔴 Quality: nullable types, no warnings, throw not log
    - 🟡 Modern C#: LINQ, expression bodies
    - 🟢 Architecture: VContainer DI, Data Controllers
    - 🔵 Performance: no LINQ in Update, no alloc in hot path
+
+Speckit reads `/memory/constitution.md` (populated from `CLAUDE.md` + `.claude/docs/technical-preferences.md` during `/setup-engine`) for its gate checks.
 
 Path-scoped rules fire automatically: code in `Assets/Scripts/Gameplay/` enforces data-driven values, no UI coupling.
 
@@ -205,36 +194,31 @@ Try to commit a GDD missing the "Formulas" section → `validate-commit.sh` bloc
 Try to commit `Data/meteors.json` with broken JSON → blocked.
 Try to push to `main` without a PR → `validate-push.sh` warns you.
 
-### 5.3 Gate check
+### 4.3 Gate check
 
 ```
-> /gate-check prod
+> /gate-check implementation
 ```
 
 ---
 
-## Phase 6 — Polish
+## Phase 5 — Polish & Release
 
 ```
 > /perf-profile
 > /balance-check
 > /playtest-report
+> /release-checklist
 ```
 
 Profile target: 60 FPS on iPhone 12, <100MB RAM, <30MB install.
 
----
+`/release-checklist` verifies: version bumped, changelog written, store metadata ready, privacy policy linked, crash reporter installed, analytics events firing.
 
-## Phase 7 — Release
-
-```
-> /release-checklist
-```
-
-Verifies: version bumped, changelog written, store metadata ready, privacy policy linked, crash reporter installed, analytics events firing.
+If a critical bug reaches users post-ship: `/hotfix` fast-tracks a patch with a scoped exception to the usual gate flow (see `CLAUDE.md` Governance).
 
 ```
-> /gate-check release
+> /gate-check polish
 ```
 
 `PASS` → you're ready to ship.

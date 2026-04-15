@@ -212,7 +212,7 @@ def init(
     console.print("\n[bold]Next steps:[/bold]")
     console.print("  1. [cyan]cd[/cyan] into the project root (where .claude/ is)")
     console.print("  2. Open [cyan]Claude Code[/cyan] from HERE (not from Assets/ or a subfolder)")
-    console.print("  3. Run [cyan]/start[/cyan] to begin the 7-phase workflow")
+    console.print("  3. Run [cyan]/start[/cyan] to begin the 5-phase workflow")
     console.print("\nDocs: [blue]https://github.com/eternalTornado/unity-gamedev-kit[/blue]\n")
 
 

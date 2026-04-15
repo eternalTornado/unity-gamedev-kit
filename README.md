@@ -8,7 +8,7 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/eternalTornado/unity-gamedev-kit/releases)
+[![Version](https://img.shields.io/badge/version-1.1.1-brightgreen.svg)](https://github.com/eternalTornado/unity-gamedev-kit/releases)
 [![Status](https://img.shields.io/badge/status-stable-brightgreen.svg)](https://github.com/eternalTornado/unity-gamedev-kit)
 
 </div>
@@ -19,7 +19,7 @@
 
 A one-command scaffolder that drops an opinionated `.claude/` directory — **agents, skills, hooks, rules, and templates** — into any Unity project, so your whole team and Claude Code share the same workflow.
 
-**Philosophy:** Game dev isn't a stream of Jira tickets. It's a 7-phase pipeline: Concept → Systems Design → Technical Setup → Pre-Production → Production → Polish → Release. Each phase has a gate. Each gate has artifacts. `ugk` gives Claude Code the rules to enforce that.
+**Philosophy:** Game dev isn't a stream of Jira tickets. It's a 5-phase pipeline: Concept → Systems Design → Architecture → Implementation → Polish. Each phase has a gate. Each gate has artifacts. `ugk` gives Claude Code the rules to enforce that, and delegates Phase 4 to [speckit](https://github.com/github/spec-kit) for `/plan` → `/tasks` → `/implement`.
 
 ## Quick start
 
@@ -48,30 +48,31 @@ Then open **Claude Code** in the project folder and type `/start`.
 MyUnityProject/
 ├── CLAUDE.md                        # Entry point — Claude reads this first
 ├── .claude/
-│   ├── agents/                      # 13 Unity-specialized sub-agents
-│   ├── skills/                      # 23 slash-commands (/start, /design-system, /code-audit, ...)
+│   ├── agents/                      # 14 Unity-specialized sub-agents
+│   ├── commands/                    # 40 slash-commands (/start, /design-system, /implement, ...)
 │   ├── hooks/                       # 6 shell hooks + 6 Windows .ps1 equivalents
 │   ├── rules/                       # 8 path-scoped rules for Assets/Scripts/**
 │   └── settings.json                # Hook + permission registrations
 ├── Design/GDD/                      # Game design docs — 7-section template (doubles as Phase 4 spec)
 ├── Docs/architecture/               # Architecture Decision Records (ADRs)
-├── Production/                      # Epics, stories, sprint plans, session state
+├── Docs/specs/                      # speckit outputs — per-module plan.md, tasks.md, contracts/
+├── Production/                      # Sprint state, QA evidence, session state
 └── Assets/Scripts/{Core,Gameplay,AI,UI,Networking}/   # Path-scoped rule zones
 ```
 
-## The 7-Phase Workflow
+## The 5-Phase Workflow
 
 | Phase | Skill | Output | Gate |
 |---|---|---|---|
 | 1. Concept | `/brainstorm` → `/setup-engine` → `/map-systems` | `game-concept.md`, `systems-index.md` | `/gate-check concept` |
 | 2. Systems Design | `/design-system` (×N) → `/review-all-gdds` | 7-section GDDs, cross-review | `/gate-check systems` |
-| 3. Technical Setup | `/create-architecture` → `/architecture-decision` | `architecture.md`, ADRs | `/gate-check tech` |
-| 4. Pre-Production | `/create-epics` → `/create-stories` → `/sprint-plan` | Epic/Story backlog | `/gate-check preprod` |
-| 5. Production | `/dev-story` → `/code-review` | Code + unit/integration tests | `/gate-check prod` |
-| 6. Polish | `/perf-profile` → `/balance-check` → `/playtest-report` | Tuned build | `/gate-check polish` |
-| 7. Release | `/release-checklist` → `/hotfix` | Shipped build | `/gate-check release` |
+| 3. Architecture | `/create-architecture` → `/architecture-decision` | `architecture.md`, ADRs | `/gate-check architecture` |
+| 4. Implementation | `/implement <module>` → speckit `/plan` → `/tasks` → `/implement` → `/code-review` | `Docs/specs/<module>/`, code, tests | `/gate-check implementation` |
+| 5. Polish | `/perf-profile` → `/balance-check` → `/playtest-report` → `/release-checklist` → `/hotfix` | Tuned build + shipped release | `/gate-check polish` |
 
 Each gate returns a verdict: `PASS` / `CONCERNS` / `FAIL`. `CONCERNS` passes with acknowledged risk; `FAIL` blocks the next phase.
+
+**Why 5 phases instead of 7?** Phase 4 (Implementation) delegates to [speckit](https://github.com/github/spec-kit) for planning and task breakdown. The GDD already contains feature spec content (Detailed Rules, Formulas, Edge Cases, Acceptance Criteria), so `/speckit.specify` is skipped — `/implement <module>` reads the GDD directly and runs `/speckit.plan` → `/speckit.tasks` → `/speckit.implement`. This collapses old "Pre-Production + Production + Release" into one delegated phase.
 
 ## Why `ugk` over copying files manually?
 
@@ -131,22 +132,24 @@ Rules attach to folder globs. Code in `Assets/Scripts/AI/` gets AI rules (2ms bu
 
 ## Project status
 
-**v1.0.0 — stable.** All roadmap items shipped.
+**v1.1.1 — stable.** 5-phase workflow with speckit integration for Phase 4.
 
 - [x] `ugk init` with base template + scope profiles
-- [x] 23 skills (6 doc-code-sync, 12 core, 5 design/release)
-- [x] 13 agents covering leadership, design, engineering, process
+- [x] 40 commands across the 5-phase workflow + doc-code-sync loop
+- [x] 14 agents covering leadership, design, engineering, process
 - [x] Scope profiles: mobile, pc, multiplayer
 - [x] `ugk update` with hash-aware migration
 - [x] `ugk add <kind> <name>` for selective install
 - [x] `ugk list [kind]` to browse catalog
 - [x] Windows-native hooks (PowerShell)
 - [x] CI templates (GitHub Actions)
+- [x] Speckit integration for Phase 4 (`/implement <module>`)
+- [x] 7-section GDD format (GDD doubles as speckit feature spec)
 
 ## Inspirations & credits
 
-- [github/spec-kit](https://github.com/github/spec-kit) — the CLI distribution pattern
-- [Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) — 48-agent studio, 7-phase pipeline, hook patterns
+- [github/spec-kit](https://github.com/github/spec-kit) — CLI distribution pattern + Phase 4 planning/task delegation
+- [Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) — 48-agent studio, phased pipeline, hook patterns
 - [The1Studio/theone-training-skills](https://github.com/The1Studio/theone-training-skills) — priority hierarchy, VContainer/SignalBus enforcement
 
 ## License

@@ -39,10 +39,9 @@ How to use unity-gamedev-kit with different team sizes and compositions.
 
 **Setup:** Add `producer` role (real person), promote `producer-lite` to full `producer` agent workflow.
 
-**Flow:** Follows the full 7-phase pipeline from `.claude/docs/`:
+**Flow:** Follows the full 5-phase pipeline (Phase 4 delegates to speckit):
 ```
-Concept → Systems Design → Technical Setup → Pre-Production →
-Production → Polish → Release
+Concept → Systems Design → Architecture → Implementation (speckit) → Polish
 ```
 
 **Roles map to agents:**

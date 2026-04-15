@@ -40,7 +40,7 @@ unity-gamedev-kit/
 
 1. Drop the file in `src/ugk/templates/base/.claude/commands/<name>.md`.
 2. Add frontmatter `name:` + `description:` (triggering description).
-3. Document the 7-phase position: which phase is this for?
+3. Document the 5-phase position: which phase is this for (concept / systems / architecture / implementation / polish)?
 4. Open a PR.
 
 ## Adding an agent
