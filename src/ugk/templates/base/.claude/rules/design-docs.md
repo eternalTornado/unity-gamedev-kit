@@ -5,7 +5,8 @@ paths:
 
 # Design Document Rules
 
-- Every design document MUST contain these 8 sections: Overview, Player Fantasy, Detailed Rules, Formulas, Edge Cases, Dependencies, Tuning Knobs, Acceptance Criteria
+- Every design document MUST contain these 7 sections: Overview, Detailed Rules, Formulas, Edge Cases, Dependencies, Tuning Knobs, Acceptance Criteria
+- The GDD is the feature spec for Phase 4 implementation (speckit skips `/speckit.specify` because the GDD already contains everything `spec.md` would have). Keep sections implementation-actionable — "player fantasy" / mood / tone belongs in the concept doc, not per-system GDDs
 - Formulas must include variable definitions, expected value ranges, and example calculations
 - Edge cases must explicitly state what happens, not just "handle gracefully"
 - Dependencies must be bidirectional — if system A depends on B, B's doc must mention A

@@ -9,7 +9,7 @@ This guide maps the full day-to-day flow for teams using `unity-gamedev-kit`.
 | Phase | Commands | Artifacts |
 |---|---|---|
 | 1. Concept | `/brainstorm`, `/setup-engine`, `/map-systems` | `Design/GDD/game-concept.md`, `systems-index.md` |
-| 2. Systems Design | `/design-system`, `/review-all-gdds`, `/update-gdd` | 8-section GDDs per system |
+| 2. Systems Design | `/design-system`, `/review-all-gdds`, `/update-gdd` | 7-section GDDs per system |
 | 3. Architecture | `/create-architecture`, `/architecture-decision` | `Docs/architecture/` + ADRs |
 | 4. Implementation | `/implement <module>` → speckit `/plan` → `/tasks` → `/implement` → `/code-review` | `Docs/specs/<module>/`, source code, tests |
 | 5. Polish | `/perf-profile`, `/balance-check`, `/playtest-report`, `/release-checklist`, `/hotfix` | Tuned build + shipped release |

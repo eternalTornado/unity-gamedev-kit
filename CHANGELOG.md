@@ -4,6 +4,19 @@ All notable changes to `unity-gamedev-kit` are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versioning follows [SemVer](https://semver.org/).
 
+## [1.1.1] — 2026-04-15
+
+### Changed — GDD format (7 sections, was 8)
+- **Removed** `Player Fantasy` from mandatory GDD sections. The GDD is now the **feature spec** consumed by speckit in Phase 4, so sections must be implementation-actionable. Mood, tone, and player fantasy content belongs in `Design/GDD/game-concept.md`, not per-system GDDs.
+- New mandatory 7 sections: Overview, Detailed Rules, Formulas, Edge Cases, Dependencies, Tuning Knobs, Acceptance Criteria (+ optional Game Feel).
+- Updated files: `.claude/rules/design-docs.md` (source of truth), `.claude/commands/{adopt,design-system,design-review,review-all-gdds,diff-design,code-audit,update-gdd,quick-design,project-stage-detect,gate-check,implement,start}.md`, `.claude/hooks/validate-commit.sh`, `.github/workflows/unity-ci.yml`, template `CLAUDE.md`.
+- `/adopt` now flags legacy `Player Fantasy` sections and offers to relocate their content into the concept doc.
+- `creative-director` agent still owns player fantasy (now scoped to the concept doc).
+
+### Migration notes
+- Existing GDDs with a `Player Fantasy` section remain valid; run `/adopt` to relocate the content to `Design/GDD/game-concept.md` and drop the section.
+- CI grep loop no longer warns on missing `Player Fantasy`.
+
 ## [1.1.0] — 2026-04-15
 
 ### Changed — Workflow restructure (BREAKING)

@@ -13,7 +13,7 @@ model: opus
 
 ## Workflow
 
-1. **Read current GDD** + **8-section structure**.
+1. **Read current GDD** + **7-section structure** (see `.claude/rules/design-docs.md`).
 2. For each decision:
    - Locate correct section
    - Draft the edit (addition, replacement, or removal)

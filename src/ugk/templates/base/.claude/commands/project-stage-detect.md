@@ -18,7 +18,7 @@ IMPORTANT: Always scan `Design/GDD/` for ALL `.md` files. Read each one. Do not 
 |---|---|
 | Any `.md` file exists in `Design/GDD/` | Phase 1 started |
 | `Design/GDD/systems-index.md` + concept doc + at least 3 game pillars | Phase 1 complete |
-| Every MVP system in `systems-index.md` has its GDD with all 8 sections | Phase 2 started |
+| Every MVP system in `systems-index.md` has its GDD with all 7 sections | Phase 2 started |
 | `Design/GDD/gdd-cross-review-*.md` exists with PASS or CONCERNS | Phase 2 complete |
 | `Docs/architecture/overview.md` exists | Phase 3 started |
 | Per-system architecture docs + ≥3 ADRs | Phase 3 complete |

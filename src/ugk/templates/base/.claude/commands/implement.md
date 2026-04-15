@@ -38,7 +38,7 @@ Docs/architecture/<module>.md  <-- system architecture (from Phase 3)
 
 Stop and surface missing inputs if any of the following are absent:
 
-- `Design/GDD/<module-name>.md` exists and has all 8 sections complete
+- `Design/GDD/<module-name>.md` exists and has all 7 sections complete (see `.claude/rules/design-docs.md`)
 - `Docs/architecture/<module-name>.md` OR `Docs/architecture/overview.md` exists
 - `/gate-check architecture` returned PASS (check `Production/stage.txt`)
 - `speckit` is installed in the project (look for `.specify/` directory — if missing, instruct the user to run `specify init` or `uvx specify-cli`)

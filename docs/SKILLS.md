@@ -11,7 +11,7 @@ All skills shipped with unity-gamedev-kit. Run `ugk list skills` to see them in 
 ## Design
 | Skill | Model | Purpose |
 |-------|-------|---------|
-| `/design-system` | opus | Author full 8-section GDD (incremental write) |
+| `/design-system` | opus | Author full 7-section GDD (incremental write) |
 | `/quick-design` | opus | GDD-lite for small features (3 sections) |
 | `/design-review` | opus | Peer-review a GDD for completeness + consistency |
 | `/update-gdd` | opus | Apply clarifications/decisions back into GDD |

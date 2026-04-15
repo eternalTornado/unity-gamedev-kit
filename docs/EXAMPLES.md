@@ -49,7 +49,7 @@ $ (in Claude Code)
   → Recommended: /design-system
 
 > /design-system daily-login-reward
-  → Author 8-section GDD incrementally, approval per section
+  → Author 7-section GDD incrementally, approval per section
 
 > /design-review design/gdd/daily-login-reward.md
   → CONCERNS (3 must-fix, 4 nits)

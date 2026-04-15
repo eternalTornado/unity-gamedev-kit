@@ -52,8 +52,8 @@ Summarize what you found. Be specific -- list the actual files you found, not ju
 
 Design/GDD/ (3 files found):
   - game-concept.md -- game concept with pillars, core loop (complete)
-  - combat.md -- combat system design, 6/8 sections present (missing: Formulas, Acceptance Criteria)
-  - progression.md -- raw design notes, not in 8-section format
+  - combat.md -- combat system design, 5/7 sections present (missing: Formulas, Acceptance Criteria)
+  - progression.md -- raw design notes, not in 7-section format
 
 Engine: Unity 6 configured (URP, mobile target)
 Code: 0 .cs files in Assets/Scripts/
@@ -61,7 +61,7 @@ Architecture: No docs yet
 Specs: No Docs/specs/ — Phase 4 not started
 Production: No active session state, Production/stage.txt missing
 
-Assessment: Phase 1 complete. Phase 2 partially complete — GDDs exist but not all in 8-section format.
+Assessment: Phase 1 complete. Phase 2 partially complete — GDDs exist but not all in 7-section format.
 ```
 
 ## Step 3: Route to next action
@@ -72,8 +72,8 @@ Based on what you found, suggest one or more paths from this table:
 |---|---|---|
 | Active session state in `active.md` | varies | Resume from where you left off |
 | No GDD files at all, no concept | Phase 1 | `/brainstorm` — start from scratch |
-| GDD files exist but not in 8-section format | Phase 1-2 | `/adopt` — retrofit to kit format |
-| GDDs in 8-section format, engine not configured | Phase 1 | `/setup-engine` — configure tech stack |
+| GDD files exist but not in 7-section format | Phase 1-2 | `/adopt` — retrofit to kit format |
+| GDDs in 7-section format, engine not configured | Phase 1 | `/setup-engine` — configure tech stack |
 | GDDs complete, engine configured, no architecture | Phase 2→3 | `/gate-check systems` then `/create-architecture` |
 | Architecture docs exist, no specs | Phase 3→4 | `/gate-check architecture` then `/implement <module>` |
 | Specs exist, some `tasks.md` complete | Phase 4 | `/implement <next-module>` or `/gate-check implementation` |

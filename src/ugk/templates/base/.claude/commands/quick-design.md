@@ -1,6 +1,6 @@
 ---
 name: quick-design
-description: Rapid GDD-lite for small features that don't need a full 8-section doc. Overview + Rules + Tuning only. Escape hatch for tweaks.
+description: Rapid GDD-lite for small features that don't need a full 7-section doc. Overview + Rules + Tuning only. Escape hatch for tweaks.
 model: opus
 ---
 

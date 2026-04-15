@@ -97,16 +97,15 @@ Verdict: `PASS` → move to Phase 2.
 > /design-system orbit
 ```
 
-Claude walks you through the **8 required sections**:
+Claude walks you through the **7 required sections**:
 
 1. Overview
-2. Player Fantasy
-3. Detailed Rules
-4. Formulas (with variables, ranges, examples)
-5. Edge Cases (explicit resolution, not "handle gracefully")
-6. Dependencies (bidirectional)
-7. Tuning Knobs (safe ranges)
-8. Acceptance Criteria (testable)
+2. Detailed Rules
+3. Formulas (with variables, ranges, examples)
+4. Edge Cases (explicit resolution, not "handle gracefully")
+5. Dependencies (bidirectional)
+6. Tuning Knobs (safe ranges)
+7. Acceptance Criteria (testable)
 
 Plus a **Game Feel** section for orbit speed, input responsiveness, juice.
 

@@ -27,7 +27,7 @@ For every pair of GDDs that share a dependency:
 ### Phase 2: Design Theory Review (can run in parallel with Phase 1)
 
 For each GDD individually:
-- Does the Player Fantasy align with the mechanics described?
+- Do the Rules align with the pillars in `Design/GDD/game-concept.md`?
 - Are formulas complete (no undefined variables, no magic numbers)?
 - Are edge cases truly edge cases (not normal gameplay)?
 - Are acceptance criteria testable by QA (not vague)?

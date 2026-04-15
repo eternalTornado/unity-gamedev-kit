@@ -23,11 +23,11 @@ Do NOT fix anything. This is READ-ONLY reconnaissance. Ask before writing the ga
 
 ## Workflow
 
-1. **Parse GDD** for 8 sections. Extract:
-   - Named mechanics from §3 Detailed Rules
-   - Formulas and constants from §4 Formulas
-   - Tuning values from §7 Tuning Knobs
-   - Acceptance criteria from §8
+1. **Parse GDD** for 7 sections. Extract:
+   - Named mechanics from §2 Detailed Rules
+   - Formulas and constants from §3 Formulas
+   - Tuning values from §6 Tuning Knobs
+   - Acceptance criteria from §7
 2. **Scan code** (via Grep/Read):
    - Find class/MonoBehaviour names matching mechanic names
    - Find constants, public fields, ScriptableObject references

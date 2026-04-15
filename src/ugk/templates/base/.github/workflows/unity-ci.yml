@@ -43,12 +43,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check GDD 8-section presence
+      - name: Check GDD 7-section presence
         run: |
           missing=0
           for gdd in design/gdd/*.md; do
             [ -f "$gdd" ] || continue
-            for section in "Overview" "Player Fantasy" "Detailed Rules" "Formulas" "Edge Cases" "Dependencies" "Tuning Knobs" "Acceptance Criteria"; do
+            for section in "Overview" "Detailed Rules" "Formulas" "Edge Cases" "Dependencies" "Tuning Knobs" "Acceptance Criteria"; do
               if ! grep -q "## .*$section" "$gdd"; then
                 echo "::warning file=$gdd::Missing section: $section"
                 missing=1

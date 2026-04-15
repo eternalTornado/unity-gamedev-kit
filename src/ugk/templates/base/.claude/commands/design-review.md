@@ -13,7 +13,7 @@ model: opus
 ## Workflow
 
 1. **Read the full GDD**.
-2. **Check 8-section completeness**: Overview, Player Fantasy, Detailed Rules, Formulas, Edge Cases, Dependencies, Tuning Knobs, Acceptance Criteria (+ Game Feel).
+2. **Check 7-section completeness**: Overview, Detailed Rules, Formulas, Edge Cases, Dependencies, Tuning Knobs, Acceptance Criteria (+ Game Feel).
 3. **Per-section quality checks**:
    - **Rules**: unambiguous? measurable? no hand-waving?
    - **Formulas**: all variables defined? units specified?
@@ -22,7 +22,7 @@ model: opus
    - **Tuning Knobs**: ranges specified? default values?
    - **Acceptance Criteria**: each one testable? tied to a formula or rule?
 4. **Consistency checks**:
-   - Player Fantasy aligns with Rules (doesn't promise something Rules don't deliver)
+   - Rules align with the concept doc's pillars (no Rules that contradict stated game pillars)
    - Formulas support the stated Rules
    - No section contradicts another
 5. **Flag anti-patterns**:
@@ -48,8 +48,8 @@ model: opus
 - §7 Tuning Knob `parry_window` has no range (suggest 4–12 frames)
 
 ## Cross-section consistency
-✅ Fantasy aligns with Rules
-⚠️ Formula §4 implies 0.5 damage floor, not stated in Rules
+✅ Rules align with concept pillars
+⚠️ Formula §3 implies 0.5 damage floor, not stated in Rules
 
 ## Recommendation
 Run `/update-gdd` to address must-fix items, then re-review.

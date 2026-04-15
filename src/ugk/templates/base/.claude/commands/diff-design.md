@@ -25,7 +25,7 @@ Ask BEFORE writing any output file: "May I write the diff report to `production/
 
 1. **Locate baseline**. Run `git log --oneline -- <gdd-file>` to find last commit. If `<since>` provided, use it.
 2. **Compute diff**. Run `git diff <since> HEAD -- <gdd-file>`.
-3. **Classify changes** by GDD section (8 sections: Overview, Player Fantasy, Detailed Rules, Formulas, Edge Cases, Dependencies, Tuning Knobs, Acceptance Criteria + Game Feel):
+3. **Classify changes** by GDD section (7 sections: Overview, Detailed Rules, Formulas, Edge Cases, Dependencies, Tuning Knobs, Acceptance Criteria + Game Feel):
    - **ADDED** — new section or new content
    - **MODIFIED** — changed rule/formula/value
    - **REMOVED** — deleted content

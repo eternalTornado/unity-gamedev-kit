@@ -53,7 +53,7 @@ MyUnityProject/
 │   ├── hooks/                       # 6 shell hooks + 6 Windows .ps1 equivalents
 │   ├── rules/                       # 8 path-scoped rules for Assets/Scripts/**
 │   └── settings.json                # Hook + permission registrations
-├── Design/GDD/                      # Game design docs — 8-section template
+├── Design/GDD/                      # Game design docs — 7-section template (doubles as Phase 4 spec)
 ├── Docs/architecture/               # Architecture Decision Records (ADRs)
 ├── Production/                      # Epics, stories, sprint plans, session state
 └── Assets/Scripts/{Core,Gameplay,AI,UI,Networking}/   # Path-scoped rule zones
@@ -64,7 +64,7 @@ MyUnityProject/
 | Phase | Skill | Output | Gate |
 |---|---|---|---|
 | 1. Concept | `/brainstorm` → `/setup-engine` → `/map-systems` | `game-concept.md`, `systems-index.md` | `/gate-check concept` |
-| 2. Systems Design | `/design-system` (×N) → `/review-all-gdds` | 8-section GDDs, cross-review | `/gate-check systems` |
+| 2. Systems Design | `/design-system` (×N) → `/review-all-gdds` | 7-section GDDs, cross-review | `/gate-check systems` |
 | 3. Technical Setup | `/create-architecture` → `/architecture-decision` | `architecture.md`, ADRs | `/gate-check tech` |
 | 4. Pre-Production | `/create-epics` → `/create-stories` → `/sprint-plan` | Epic/Story backlog | `/gate-check preprod` |
 | 5. Production | `/dev-story` → `/code-review` | Code + unit/integration tests | `/gate-check prod` |

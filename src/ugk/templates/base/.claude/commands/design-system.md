@@ -1,20 +1,21 @@
 ---
 name: design-system
-description: Authors a single-system GDD (combat, orbit, economy, etc.) with the 8 mandatory sections + Game Feel. Section-by-section with user approval; writes each section to file immediately.
+description: Authors a single-system GDD (combat, orbit, economy, etc.) with the 7 mandatory sections + Game Feel. Section-by-section with user approval; writes each section to file immediately.
 ---
 
 # /design-system — Single System GDD Authoring
 
+The GDD is the **feature spec** consumed by speckit in Phase 4 — it must be implementation-actionable. Mood/tone/fantasy belongs in `Design/GDD/game-concept.md`, not here.
+
 ## Required sections (enforced by validate-commit hook)
 
 1. **Overview** — one paragraph.
-2. **Player Fantasy** — what the player imagines feeling.
-3. **Detailed Rules** — unambiguous mechanical rules.
-4. **Formulas** — every calculation with variable definitions, ranges, examples.
-5. **Edge Cases** — explicit resolution (not "handle gracefully").
-6. **Dependencies** — bidirectional (A refs B → B must ref A).
-7. **Tuning Knobs** — designer-safe ranges per knob.
-8. **Acceptance Criteria** — QA-testable pass/fail.
+2. **Detailed Rules** — unambiguous mechanical rules.
+3. **Formulas** — every calculation with variable definitions, ranges, examples.
+4. **Edge Cases** — explicit resolution (not "handle gracefully").
+5. **Dependencies** — bidirectional (A refs B → B must ref A).
+6. **Tuning Knobs** — designer-safe ranges per knob.
+7. **Acceptance Criteria** — QA-testable pass/fail.
 
 Plus **Game Feel** section: input responsiveness (ms/frames), animation timing (startup/active/recovery), impact moments, weight profile.
 
@@ -28,7 +29,7 @@ Plus **Game Feel** section: input responsiveness (ms/frames), animation timing (
 
 4. **Collect open questions in ONE batch** — if the user's ask has ambiguities (scope, scale, depth of mechanics), use the `AskUserQuestion` tool to batch them into one call (max 4 questions, 2-4 concrete options each). Do NOT ask free-form in chat unless the answer is truly open-ended (e.g., "describe the fantasy in your own words").
 
-5. **For each of the 9 sections** (8 mandatory + Game Feel), in order:
+5. **For each of the 8 sections** (7 mandatory + Game Feel), in order:
    a. Present context (what upstream/downstream systems imply)
    b. Use `AskUserQuestion` for enumerable choices, free-form only when unavoidable
    c. Draft the section

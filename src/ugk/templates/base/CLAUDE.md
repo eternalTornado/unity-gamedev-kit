@@ -54,7 +54,7 @@ If nothing obvious comes next, say so explicitly (`No obvious next step — ask 
 | Phase | Key commands | Artifacts |
 |---|---|---|
 | 1. Concept | `/brainstorm`, `/setup-engine`, `/map-systems` | `Design/GDD/game-concept.md`, `systems-index.md` |
-| 2. Systems Design | `/design-system`, `/review-all-gdds`, `/update-gdd` | 8-section GDDs per system |
+| 2. Systems Design | `/design-system`, `/review-all-gdds`, `/update-gdd` | 7-section GDDs per system |
 | 3. Architecture | `/create-architecture`, `/architecture-decision` | `Docs/architecture/` + ADRs |
 | 4. Implementation | `/implement <module>` → speckit `/plan` → `/tasks` → `/implement` → `/code-review` | `Docs/specs/<module>/plan.md`, `tasks.md`, source code, tests |
 | 5. Polish | `/perf-profile`, `/balance-check`, `/playtest-report`, `/release-checklist`, `/hotfix` | Tuned build + shipped release |
@@ -98,7 +98,7 @@ Phase 4 uses [speckit](https://github.com/github/spec-kit) for spec-driven imple
 | `Assets/Scripts/AI/**` | `.claude/rules/ai-code.md` | 2ms/frame budget, debug visualization |
 | `Assets/Scripts/UI/**` | `.claude/rules/ui-code.md` | No game state ownership, accessibility |
 | `Assets/Scripts/Networking/**` | `.claude/rules/network-code.md` | Server-authoritative, versioned messages |
-| `Design/GDD/**` | `.claude/rules/design-docs.md` | 8 mandatory sections |
+| `Design/GDD/**` | `.claude/rules/design-docs.md` | 7 mandatory sections (GDD = spec for speckit) |
 | `Docs/specs/**` | speckit conventions | Per-module plan.md, tasks.md, data-model.md, contracts/ |
 | `Tests/**` | `.claude/rules/test-standards.md` | AAA structure, regression tests |
 | `Prototypes/**` | `.claude/rules/prototype-code.md` | Relaxed — hardcode allowed |
