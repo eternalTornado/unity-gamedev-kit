@@ -40,7 +40,7 @@ These map to the 5-phase workflow:
 
 ### `systems` (Phase 2 → 3)
 - [ ] All MVP systems in `systems-index.md` have `Status: Approved`
-- [ ] Each MVP system has its own `Design/GDD/<name>.md` with all 7 sections (sections marked "N/A — [justification]" count as valid if justification exists; only Formulas, Edge Cases, and Tuning Knobs may be N/A)
+- [ ] Each MVP system has a complete 7-section spec: either `Docs/Retrofit/retrofit-<name>.md` (from `/adopt`) or `Design/GDD/<name>.md` (agent-authored). Sections marked "N/A — [justification]" count as valid if justification exists; only Formulas, Edge Cases, and Tuning Knobs may be N/A.
 - [ ] `Design/GDD/gdd-cross-review-*.md` exists with verdict PASS or CONCERNS
 
 ### `architecture` (Phase 3 → 4)

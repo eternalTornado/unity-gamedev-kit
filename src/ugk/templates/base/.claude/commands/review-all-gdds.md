@@ -8,13 +8,15 @@ model: opus
 
 ## What this command does
 
-Reads every GDD in `Design/GDD/` and performs two independent review passes, then synthesizes findings into an actionable report.
+Reads every GDD spec and performs two independent review passes, then synthesizes findings into an actionable report. Specs may be in two locations:
+- `Docs/Retrofit/retrofit-<name>.md` — retrofit output from `/adopt` (preferred if exists)
+- `Design/GDD/<name>.md` — agent-authored GDDs already in 7-section format
 
 ## Process
 
 ### Phase 0: Scan (MANDATORY)
 
-List ALL `.md` files in `Design/GDD/`. Read every file. Do not skip any. Report how many GDDs were found before proceeding.
+List ALL `.md` files in `Design/GDD/` AND `Docs/Retrofit/`. For each system, use the retrofit file if it exists, otherwise use the raw GDD. Read every file. Do not skip any. Report how many specs were found (and how many are retrofits vs raw) before proceeding.
 
 ### Phase 1: Consistency Check (can run in parallel with Phase 2)
 

@@ -6,7 +6,8 @@ paths:
 # Design Document Rules
 
 - Every design document MUST contain these 7 sections: Overview, Detailed Rules, Formulas, Edge Cases, Dependencies, Tuning Knobs, Acceptance Criteria
-- After retrofit and `/gate-check systems` PASS, the completed GDD serves as the feature spec for Phase 4 implementation (speckit skips `/speckit.specify` because the completed GDD already contains everything `spec.md` would have). Keep sections implementation-actionable — mood / tone / creative framing belongs in the concept doc, not per-system GDDs
+- After retrofit and `/gate-check systems` PASS, the completed spec serves as the feature spec for Phase 4 implementation (speckit skips `/speckit.specify` because the spec already contains everything `spec.md` would have). Keep sections implementation-actionable — mood / tone / creative framing belongs in the concept doc, not per-system GDDs
+- Retrofit output goes to `Docs/Retrofit/retrofit-<name>.md` — the original GDD in `Design/GDD/` is never modified by `/adopt`. Agent-authored GDDs (from `/design-system`) are written directly to `Design/GDD/` in 7-section format
 - Formulas MUST follow this structure — prose-only formulas are not accepted:
   1. Formula expression: `formula_name = expression`
   2. Variable table: Variable | Type | Range | Description

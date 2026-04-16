@@ -1,19 +1,27 @@
 ---
 name: adopt
-description: Retrofit existing GDD documents into the ugk 7-section format. Use when a project has design docs that predate ugk installation.
+description: Retrofit existing GDD documents into the ugk 7-section format. Reads from Design/GDD/, writes retrofit output to Docs/Retrofit/retrofit-<name>.md — original GDD is never modified.
 ---
 
 # /adopt -- Retrofit Existing GDDs to Kit Format
 
 ## What this command does
 
-Scans `Design/GDD/` for existing markdown documents and helps convert them into the ugk 7-section GDD format, preserving all existing content while adding missing sections.
+Scans `Design/GDD/` for existing markdown documents and converts them into the ugk 7-section GDD format. **The original GDD is never modified.** Retrofit output is written to `Docs/Retrofit/retrofit-<name>.md`, preserving the Game Designer's raw document as the source of truth.
 
-After retrofit (all 7 sections complete, cross-reviewed, gate passed), the GDD serves as the implementation spec consumed by speckit in Phase 4. Any mood, tone, or creative-framing content found in existing docs does NOT belong in per-system GDDs — relocate it to the concept doc (`Design/GDD/game-concept.md`) and drop it from the GDD. Never invent or re-add non-implementation-actionable sections during retrofit.
+After retrofit (all 7 sections complete, cross-reviewed, gate passed), the retrofit file serves as the implementation spec consumed by speckit in Phase 4. Any mood, tone, or creative-framing content found in existing docs does NOT belong in retrofit output — relocate it to the concept doc (`Design/GDD/game-concept.md`). Never invent or re-add non-implementation-actionable sections during retrofit.
+
+## File path convention
+
+- **Input** (read-only): `Design/GDD/<name>.md` — raw GDD from Game Designer, any format
+- **Output**: `Docs/Retrofit/retrofit-<name>.md` — 7-section spec, created by `/adopt`
+- Create `Docs/Retrofit/` directory if it doesn't exist
+
+Example: `Design/GDD/combat.md` → `Docs/Retrofit/retrofit-combat.md`
 
 ## Process
 
-1. **Scan** `Design/GDD/` for all `.md` files.
+1. **Scan** `Design/GDD/` for all `.md` files (excluding `game-concept.md` and `systems-index.md`).
 2. **For each document**, analyze which of the 7 required sections are present:
    1. Overview
    2. Detailed Rules
@@ -51,16 +59,17 @@ After retrofit (all 7 sections complete, cross-reviewed, gate passed), the GDD s
       - Sections that CANNOT be N/A: Overview, Detailed Rules, Dependencies, Acceptance Criteria
    d. Draft missing sections based on context from existing content
    e. User reviews and approves each section
-   f. Write the reformatted document back to the same file
+   f. **Write the retrofit file** to `Docs/Retrofit/retrofit-<name>.md` — do NOT modify the original `Design/GDD/<name>.md`
+   g. Add a header comment in the retrofit file: `<!-- Retrofitted from Design/GDD/<name>.md by /adopt -->`
 6. **After all docs are processed**: suggest `/review-all-gdds` for cross-document consistency check, or `/gate-check systems` to validate the Systems Design phase.
 
 ## Output
 
-Reformatted GDD files in `Design/GDD/` with all 7 sections populated (or explicitly marked N/A with justification).
+Retrofit files in `Docs/Retrofit/` with all 7 sections populated (or explicitly marked N/A with justification). Original GDDs in `Design/GDD/` remain untouched.
 
 ## Collaboration protocol
 
-Never overwrite existing content without showing the diff first. Present section-by-section for approval. Preserve the author's voice and intent -- only add structure, don't rewrite.
+Present section-by-section for approval. Preserve the author's voice and intent — only add structure, don't rewrite. The original GDD is never modified; all changes go to the retrofit file.
 
 ## Context awareness
 
@@ -75,4 +84,4 @@ End with a "Suggested next step" block. Typical options:
 
 - `/review-all-gdds` — cross-check consistency once all docs are retrofitted
 - `/design-system <missing-system>` — author any system listed in `systems-index.md` but not yet in `Design/GDD/`
-- `/gate-check systems` — once every MVP system has a complete 7-section GDD
+- `/gate-check systems` — once every MVP system has a complete 7-section GDD (or retrofit)

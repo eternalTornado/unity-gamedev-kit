@@ -13,7 +13,11 @@ description: Phase 4 entry point. Implements a module end-to-end by reading its 
 /implement progression
 ```
 
-`<module-name>` must match a GDD file at `Design/GDD/<module-name>.md` or a subsystem name from `Design/GDD/systems-index.md`.
+`<module-name>` must match a GDD in the project. The command looks for the feature spec in this order:
+1. `Docs/Retrofit/retrofit-<module-name>.md` (retrofit output from `/adopt`)
+2. `Design/GDD/<module-name>.md` (agent-authored GDD already in 7-section format)
+
+It also checks `Design/GDD/systems-index.md` to resolve subsystem names.
 
 ## What this command does
 
@@ -22,8 +26,9 @@ This is the **ugk wrapper around speckit's spec-driven implementation flow**. Th
 **Flow**:
 
 ```
-Design/GDD/<module>.md     <-- feature spec (from Phase 2)
-Docs/architecture/<module>.md  <-- system architecture (from Phase 3)
+Docs/Retrofit/retrofit-<module>.md  <-- feature spec (from /adopt, Phase 2)
+  OR Design/GDD/<module>.md         <-- if agent-authored (already 7-section)
+Docs/architecture/<module>.md       <-- system architecture (from Phase 3)
         |
         v
   /speckit.plan     -> Docs/specs/<module>/plan.md + data-model.md + contracts/
@@ -38,7 +43,7 @@ Docs/architecture/<module>.md  <-- system architecture (from Phase 3)
 
 Stop and surface missing inputs if any of the following are absent:
 
-- `Design/GDD/<module-name>.md` exists and has all 7 sections complete (see `.claude/rules/design-docs.md`)
+- Feature spec exists: `Docs/Retrofit/retrofit-<module-name>.md` (from `/adopt`) OR `Design/GDD/<module-name>.md` (agent-authored), with all 7 sections complete (see `.claude/rules/design-docs.md`)
 - `Docs/architecture/<module-name>.md` OR `Docs/architecture/overview.md` exists
 - `/gate-check architecture` returned PASS (check `Production/stage.txt`)
 - `speckit` is installed in the project (look for `.specify/` directory — if missing, instruct the user to run `specify init` or `uvx specify-cli`)
@@ -57,7 +62,7 @@ If there are ambiguities, use the **`AskUserQuestion` tool** to batch ALL open q
 
 Invoke speckit's planning command with these overrides:
 
-- **Input spec**: point speckit at `Design/GDD/<module>.md` instead of a `spec.md`
+- **Input spec**: point speckit at the feature spec (`Docs/Retrofit/retrofit-<module>.md` if it exists, otherwise `Design/GDD/<module>.md`) instead of a `spec.md`
 - **Output directory**: `Docs/specs/<module>/` instead of `specs/<feature>/`
 - **Constitution**: speckit will auto-read `/memory/constitution.md`. If missing, generate it from `CLAUDE.md` + `.claude/docs/technical-preferences.md` before planning
 

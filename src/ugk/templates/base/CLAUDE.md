@@ -98,7 +98,8 @@ Phase 4 uses [speckit](https://github.com/github/spec-kit) for spec-driven imple
 | `Assets/Scripts/AI/**` | `.claude/rules/ai-code.md` | 2ms/frame budget, debug visualization |
 | `Assets/Scripts/UI/**` | `.claude/rules/ui-code.md` | No game state ownership, accessibility |
 | `Assets/Scripts/Networking/**` | `.claude/rules/network-code.md` | Server-authoritative, versioned messages |
-| `Design/GDD/**` | `.claude/rules/design-docs.md` | 7 mandatory sections (GDD = spec for speckit) |
+| `Design/GDD/**` | `.claude/rules/design-docs.md` | Raw GDDs from GD — never modified by `/adopt` |
+| `Docs/Retrofit/**` | `.claude/rules/design-docs.md` | 7-section retrofit specs from `/adopt` (feature spec for Phase 4) |
 | `Docs/specs/**` | speckit conventions | Per-module plan.md, tasks.md, data-model.md, contracts/ |
 | `Tests/**` | `.claude/rules/test-standards.md` | AAA structure, regression tests |
 | `Prototypes/**` | `.claude/rules/prototype-code.md` | Relaxed — hardcode allowed |
