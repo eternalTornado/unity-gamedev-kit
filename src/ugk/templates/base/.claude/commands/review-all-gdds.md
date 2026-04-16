@@ -28,10 +28,16 @@ For every pair of GDDs that share a dependency:
 
 For each GDD individually:
 - Do the Rules align with the pillars in `Design/GDD/game-concept.md`?
-- Are formulas complete (no undefined variables, no magic numbers)?
-- Are edge cases truly edge cases (not normal gameplay)?
-- Are acceptance criteria testable by QA (not vague)?
+- Are formulas complete (no undefined variables, no magic numbers)? Do they follow the variable table format (see `design-system-rubrics.md`)?
+- Are edge cases truly edge cases (not normal gameplay)? Do they use "If [condition]: [outcome]" format?
+- **AC quality check**:
+  - Are acceptance criteria in Given-When-Then format?
+  - Does each core rule have at least one AC?
+  - Does each player-facing formula have at least one AC?
+  - Are criteria verifiable without reading the rest of the GDD?
+  - Is there a performance budget criterion (frame time, memory, or "N/A — no runtime cost")?
 - Does the system create interesting player decisions (not just busywork)?
+- Are N/A sections (if any) properly justified? Do they have a one-sentence explanation?
 
 ### Phase 3: Synthesis
 
@@ -47,3 +53,10 @@ Report printed to conversation. No file written unless user requests it.
 ## Collaboration protocol
 
 Present the full report, then ask which issues the user wants to address. Offer to run `/update-gdd` for each document that needs changes.
+
+## Context awareness
+
+This command can consume significant context window space. If context usage exceeds 70%:
+1. Write any in-progress section to file immediately
+2. Summarize remaining work
+3. Suggest the user run `/compact` then resume

@@ -17,7 +17,7 @@ description: Phase 4 entry point. Implements a module end-to-end by reading its 
 
 ## What this command does
 
-This is the **ugk wrapper around speckit's spec-driven implementation flow**. The GDD acts as the feature spec (no `/speckit.specify` needed — GDDs already contain Detailed Rules, Edge Cases, Acceptance Criteria, and Formulas).
+This is the **ugk wrapper around speckit's spec-driven implementation flow**. The completed GDD (post-retrofit, post-gate) acts as the feature spec (no `/speckit.specify` needed — completed GDDs contain Detailed Rules, Edge Cases, Acceptance Criteria, and Formulas).
 
 **Flow**:
 
@@ -103,6 +103,13 @@ Resolve any 🔴 issues before declaring done. 🟡/🟢/🔵 issues can be logg
 - Never commit code during `/implement` — commits require explicit user instruction.
 - If `/speckit.plan` surfaces constitution violations, STOP and ask the user whether to amend the constitution or adjust the plan.
 - If the GDD's Acceptance Criteria cannot be met with available infrastructure, STOP and escalate (may need an ADR first — run `/architecture-decision`).
+
+## Context awareness
+
+This command can consume significant context window space. If context usage exceeds 70%:
+1. Write any in-progress section to file immediately
+2. Summarize remaining work
+3. Suggest the user run `/compact` then resume
 
 ## Suggested next step
 

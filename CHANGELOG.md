@@ -4,6 +4,44 @@ All notable changes to `unity-gamedev-kit` are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versioning follows [SemVer](https://semver.org/).
 
+## [1.2.0] — 2026-04-16
+
+### Changed — Quality Standards Backport from CCGS (MINOR — changes behavior of existing commands)
+
+**B1: GDD language fix** — Corrected "GDD is the feature spec" → "After retrofit and gate-check PASS, the completed GDD serves as the feature spec." Raw GDDs are not specs until they pass retrofit + cross-review + gate. Updated in: `rules/design-docs.md`, `commands/adopt.md`, `commands/implement.md`, `commands/design-system.md`, template `CLAUDE.md`.
+
+**B2: Acceptance Criteria quality rubric** — AC must now use Given-When-Then format. Minimum coverage: 1 AC per core rule + 1 AC per player-facing formula (internal formulas exempt). Every criterion must be independently verifiable by QA without reading the GDD. Performance budget criterion required. Updated in: `rules/design-docs.md`, `commands/adopt.md`, `commands/review-all-gdds.md`, new `commands/design-system-rubrics.md`.
+
+**B3: Formulas completion steering** — Formulas must follow a structured format: formula expression, variable table (Variable | Type | Range | Description), output range, worked example. Prose-only formulas are no longer accepted. Updated in: `rules/design-docs.md`, `commands/design-system-rubrics.md`.
+
+**B4: Edge Cases format** — Edge cases must use "If [exact condition]: [exact outcome]" format. "Handle gracefully" / "handle appropriately" is never acceptable. Updated in: `rules/design-docs.md`, `commands/design-system-rubrics.md`.
+
+**B5: `/adopt` severity classification** — Gap report now classifies gaps as BLOCKING / HIGH / MEDIUM / LOW with severity summary. BLOCKING gaps (missing AC or Detailed Rules) prevent the GDD from serving as implementation spec. Gap report table includes a Severity column and ➖ marker for valid N/A sections.
+
+**B6: Section N/A mechanism** — Formulas, Edge Cases, and Tuning Knobs may now be marked "N/A — [justification]" if the system genuinely has no content for them. Justification is required. Overview, Detailed Rules, Dependencies, and AC cannot be N/A. N/A requires user confirmation. Updated in: `rules/design-docs.md`, `commands/adopt.md`, `commands/design-system.md`, `commands/gate-check.md`.
+
+**B8: `/start` bug fix** — Fixed "8 GDD sections" → "7 required GDD sections" (residual from v1.1.1 cleanup).
+
+### Added
+
+- **`commands/design-system-rubrics.md`** (NEW) — Quality rubrics for AC (Given-When-Then format, coverage rules, agent delegation to qa-lead), Formulas (variable table template, completion steering), and Edge Cases (format + examples). Extracted from `design-system.md` to keep the flow file lean.
+- **Context 70% warning** on all long-running commands: `design-system.md`, `adopt.md`, `review-all-gdds.md`, `implement.md`, `create-architecture.md`. When context exceeds 70%, agent writes in-progress work to file and suggests `/compact`.
+
+### Changed
+
+- **`commands/design-system.md` split** — Flow-only file (~70 lines) now references `design-system-rubrics.md` for quality guidance. Removed Game Feel from required sections list (was already optional). Added N/A flow for eligible sections.
+
+### Migration notes
+
+- Existing GDDs written before v1.2.0 may not meet the stricter AC/Formulas/Edge Cases format. Run `/adopt` to get a severity-classified gap report showing what needs updating.
+- N/A sections are a new capability — systems without formulas (e.g., Save System, Event Bus) can now explicitly mark "N/A — [reason]" instead of leaving sections empty or filling with placeholder content.
+
+### NOT backported (and why)
+
+- GDD template file (B7 REJECTED — GD sends any format, `/adopt` converts)
+- Game Feel section (user decision: dropped entirely)
+- Entity registry, agent routing table, director gates, recovery protocol, Visual/Audio/UI sections, Player Fantasy section — out of scope or previously removed
+
 ## [1.1.3] — 2026-04-15
 
 ### Added — `/create-architecture` output template (cherry-picked from external TDS template review)

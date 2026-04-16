@@ -65,7 +65,7 @@ Phase gates: `concept` (1→2), `systems` (2→3), `architecture` (3→4), `impl
 
 ## Speckit Integration (Phase 4)
 
-Phase 4 uses [speckit](https://github.com/github/spec-kit) for spec-driven implementation — but **skips `/speckit.specify`** because the GDD already contains the feature spec (Detailed Rules, Edge Cases, Acceptance Criteria, Formulas).
+Phase 4 uses [speckit](https://github.com/github/spec-kit) for spec-driven implementation — but **skips `/speckit.specify`** because the completed GDD (post-retrofit) contains the feature spec (Detailed Rules, Edge Cases, Acceptance Criteria, Formulas).
 
 **Phase 4 flow for each module/feature:**
 

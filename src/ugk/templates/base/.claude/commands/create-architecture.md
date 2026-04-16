@@ -88,6 +88,13 @@ Every `Docs/architecture/<system>.md` MUST follow this structure. Pin an **Agent
 
 Present one system at a time. For each system, show the proposed architecture before writing. Flag any GDD requirements that are technically challenging. Use `AskUserQuestion` for any enumerable choice (pattern selection, data model variant, Unity integration approach) — do NOT ask free-form in chat.
 
+## Context awareness
+
+This command can consume significant context window space. If context usage exceeds 70%:
+1. Write any in-progress section to file immediately
+2. Summarize remaining work
+3. Suggest the user run `/compact` then resume
+
 ## Suggested next step
 
 End with a "Suggested next step" block. Typical options:

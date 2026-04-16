@@ -17,7 +17,7 @@ You MUST actually read files and directories. Do not guess or assume.
 
 List ALL `.md` files in `Design/GDD/`. For EACH file found:
 - Read the file
-- Note: filename, title/topic, which of the 8 GDD sections are present
+- Note: filename, title/topic, which of the 7 required GDD sections are present
 - Check if it's a concept doc, a system GDD, or a raw design doc
 
 If the directory doesn't exist or is empty, note "No GDD files found."

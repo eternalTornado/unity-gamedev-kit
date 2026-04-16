@@ -57,7 +57,7 @@ Phase gate names: `concept` (1→2), `systems` (2→3), `architecture` (3→4), 
 | `Assets/Scripts/AI/**` | `.claude/rules/ai-code.md` | 2ms/frame budget, debug visualization |
 | `Assets/Scripts/UI/**` | `.claude/rules/ui-code.md` | No game state ownership, accessibility |
 | `Assets/Scripts/Networking/**` | `.claude/rules/network-code.md` | Server-authoritative, versioned messages |
-| `Design/GDD/**` | `.claude/rules/design-docs.md` | 7 mandatory sections |
+| `Design/GDD/**` | `.claude/rules/design-docs.md` | 7 mandatory sections (post-retrofit GDD = feature spec) |
 | `Tests/**` | `.claude/rules/test-standards.md` | AAA structure, regression tests |
 | `Prototypes/**` | `.claude/rules/prototype-code.md` | Relaxed — hardcode allowed |
 
