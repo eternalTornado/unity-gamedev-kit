@@ -7,17 +7,26 @@ description: Generate architecture documents from GDDs -- class diagrams, data f
 
 ## What this command does
 
-Translates approved GDDs into technical architecture documents. Produces class diagrams (text-based), data flow descriptions, and system boundary definitions.
+Translates approved design specs into technical architecture documents. Produces class diagrams (text-based), data flow descriptions, and system boundary definitions.
+
+## Usage
+
+```
+/create-architecture
+/create-architecture --gdd Design/GDD/combat.md
+```
+
+`--gdd <path>` — optional. Reference the original GDD alongside the retrofit spec for additional design context (mood, intent, rationale that may not have survived retrofit).
 
 ## Prerequisites
 
-- At least one approved GDD in `Design/GDD/`
+- At least one completed spec: `Docs/Retrofit/retrofit-<name>.md` (from `/adopt`) or `Design/GDD/<name>.md` (agent-authored, already 7-section)
 - `Design/GDD/systems-index.md` exists (run `/map-systems` if missing)
 - `.claude/docs/technical-preferences.md` configured (run `/setup-engine` if missing)
 
 ## Process
 
-1. **Read** all GDDs and the systems index.
+1. **Read** all specs (check `Docs/Retrofit/` first, fallback `Design/GDD/`) and the systems index. If `--gdd` provided, also read the original GDD for additional context.
 2. **For each system** (in dependency order), fill in the **Per-system output template** below:
    a. **Metadata header** — name, domain, GDD source, architect, Unity version, key dependencies
    b. **Interfaces** — public API surface (C# interfaces). Access modifiers are prescriptive.
@@ -48,7 +57,7 @@ Every `Docs/architecture/<system>.md` MUST follow this structure. Pin an **Agent
 ## 1. Metadata
 - **System:** <name>
 - **Domain:** <Gameplay | AI | UI | Networking | Core>
-- **GDD source:** `Design/GDD/<system>.md`
+- **Spec source:** `Docs/Retrofit/retrofit-<system>.md` or `Design/GDD/<system>.md`
 - **Primary architect:** <name>
 - **Unity version:** <e.g., Unity 6 LTS>
 - **Key dependencies:** <Zenject, Addressables, UniTask, Input System, …>
@@ -86,7 +95,7 @@ Every `Docs/architecture/<system>.md` MUST follow this structure. Pin an **Agent
 
 ## Collaboration protocol
 
-Present one system at a time. For each system, show the proposed architecture before writing. Flag any GDD requirements that are technically challenging. Use `AskUserQuestion` for any enumerable choice (pattern selection, data model variant, Unity integration approach) — do NOT ask free-form in chat.
+Present one system at a time. For each system, show the proposed architecture before writing. Flag any spec requirements that are technically challenging. Use `AskUserQuestion` for any enumerable choice (pattern selection, data model variant, Unity integration approach) — do NOT ask free-form in chat.
 
 ## Context awareness
 

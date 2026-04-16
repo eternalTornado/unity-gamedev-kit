@@ -14,8 +14,9 @@ model: opus
 
 ## Inputs
 
-- `<gdd-file>` — path to GDD to audit against
+- `<system-name>` — system to audit (resolves to `Docs/Retrofit/retrofit-<name>.md` first, fallback `Design/GDD/<name>.md`)
 - `<code-scope>` — optional folder glob (default: `Assets/Scripts/**`)
+- `--gdd <path>` — optional. Also read the original GDD for additional context (design intent, rationale)
 
 ## Collaboration Protocol
 
@@ -23,7 +24,7 @@ Do NOT fix anything. This is READ-ONLY reconnaissance. Ask before writing the ga
 
 ## Workflow
 
-1. **Parse GDD** for 7 sections. Extract:
+1. **Parse spec** (retrofit file or agent-authored GDD) for 7 sections. If `--gdd` provided, also read original GDD for context. Extract:
    - Named mechanics from §2 Detailed Rules
    - Formulas and constants from §3 Formulas
    - Tuning values from §6 Tuning Knobs
@@ -45,7 +46,7 @@ Do NOT fix anything. This is READ-ONLY reconnaissance. Ask before writing the ga
 
 ```markdown
 # Gap Report: <system>
-**GDD:** design/gdd/<system>.md (audited <date>)
+**Spec:** Docs/Retrofit/retrofit-<system>.md (audited <date>)
 **Code scope:** Assets/Scripts/<system>/**
 **Total gaps:** N (MISSING: X, FORMULA: Y, ORPHAN: Z, AMBIGUOUS: A)
 

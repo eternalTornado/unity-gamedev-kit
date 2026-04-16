@@ -12,13 +12,13 @@ Scans the project structure to determine the current workflow phase and suggest 
 
 ## Detection logic (5-phase workflow)
 
-IMPORTANT: Always scan `Design/GDD/` for ALL `.md` files. Read each one. Do not only look for specific filenames.
+IMPORTANT: Always scan BOTH `Design/GDD/` AND `Docs/Retrofit/` for ALL `.md` files. Read each one. Do not only look for specific filenames.
 
 | Check | Indicator |
 |---|---|
 | Any `.md` file exists in `Design/GDD/` | Phase 1 started |
 | `Design/GDD/systems-index.md` + concept doc + at least 3 game pillars | Phase 1 complete |
-| Every MVP system in `systems-index.md` has its GDD with all 7 sections | Phase 2 started |
+| Every MVP system in `systems-index.md` has a complete spec: `Docs/Retrofit/retrofit-<name>.md` or `Design/GDD/<name>.md` with all 7 sections | Phase 2 started |
 | `Design/GDD/gdd-cross-review-*.md` exists with PASS or CONCERNS | Phase 2 complete |
 | `Docs/architecture/overview.md` exists | Phase 3 started |
 | Per-system architecture docs + ≥3 ADRs | Phase 3 complete |
@@ -29,7 +29,7 @@ IMPORTANT: Always scan `Design/GDD/` for ALL `.md` files. Read each one. Do not 
 
 ## Process
 
-1. **Scan** `Design/GDD/` and list ALL `.md` files. Read each to check section completeness.
+1. **Scan** `Design/GDD/` AND `Docs/Retrofit/` and list ALL `.md` files. For each system, use retrofit file if it exists. Read each to check section completeness.
 2. **Scan** `Docs/architecture/` for overview + per-system docs + ADRs.
 3. **Scan** `Docs/specs/*/` for `plan.md` + `tasks.md`. For each `tasks.md`, count completed vs total tasks.
 4. **Scan** `Production/` for `stage.txt`, `session-state/active.md`, `qa/`, release artifacts.

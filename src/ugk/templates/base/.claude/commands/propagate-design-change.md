@@ -13,14 +13,14 @@ model: opus
 
 ## Inputs
 
-- `<gdd-file>` — the changed GDD
+- `<system-name>` — the changed system (resolves to `Docs/Retrofit/retrofit-<name>.md` first, fallback `Design/GDD/<name>.md`)
 - `<change-summary>` — optional (from `/diff-design` output)
 
 ## Workflow
 
-1. **Extract Dependencies section** from changed GDD.
+1. **Extract Dependencies section** from the spec (retrofit file or GDD).
 2. **For each dependency**:
-   - Find target GDD in `design/gdd/`
+   - Find target spec in `Docs/Retrofit/` or `Design/GDD/`
    - Grep code in `Assets/Scripts/` for references to the new/changed concept
    - Check balance configs, UI screens, save data schema
 3. **Classify impact**:

@@ -21,13 +21,13 @@ Run `/scope-check` first. If it classifies as anything but XS (data-only), refus
 1. **Locate value**:
    - Search ScriptableObjects, JSON configs, CSV data
    - NEVER touch hardcoded values in `.cs` — if hardcoded, flag as tech debt
-2. **Read current value + GDD §7 Tuning Knobs** — confirm in-range.
+2. **Read current value + spec §6 Tuning Knobs** (from `Docs/Retrofit/retrofit-<system>.md` or `Design/GDD/<system>.md`) — confirm in-range.
 3. **Ask rationale**: "Why this change? (playtest / analytics / design intent)"
 4. **Draft change set**:
    - File path
    - Before → After
    - GDD note to append
-5. **Approve** → apply edit → update `design/gdd/<system>.md §7` with timestamped note.
+5. **Approve** → apply edit → update the spec file (`Docs/Retrofit/retrofit-<system>.md` or `Design/GDD/<system>.md`) §6 Tuning Knobs with timestamped note.
 6. **Suggest regression check**: any test using old value?
 
 ## Output

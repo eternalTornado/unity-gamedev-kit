@@ -15,13 +15,14 @@ model: opus
 ## Inputs
 
 - `<story-id>` or `<pr-files>` — list of files changed
-- `<gdd-file>` — the GDD section the story maps to
+- `<system-name>` — system to verify against (resolves to `Docs/Retrofit/retrofit-<name>.md` first, fallback `Design/GDD/<name>.md`)
+- `--gdd <path>` — optional. Also read the original GDD for additional design context
 
 ## Workflow
 
-1. **Read the GDD section** referenced by the story.
+1. **Read the spec** (retrofit file or agent-authored GDD) section referenced by the story. If `--gdd` provided, also read the original GDD for context.
 2. **Read the changed files** (from git diff or story metadata).
-3. **Extract acceptance criteria** from §8 of GDD.
+3. **Extract acceptance criteria** from §7 Acceptance Criteria of the spec.
 4. **Verify each criterion** against code:
    - Named mechanics present? (class/method names match)
    - Formulas match? (constants, coefficients)
@@ -34,7 +35,7 @@ model: opus
 ## Verdict report format
 
 ```markdown
-# Verification: <story-id> vs design/gdd/<system>.md
+# Verification: <story-id> vs Docs/Retrofit/retrofit-<system>.md
 **Date:** 2026-04-13  **Overall:** PARTIAL (4/5 pass)
 
 ## Acceptance criteria
